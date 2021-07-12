@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { useEffect } from 'react';
 
-//player1 = { name: "", puesto, jugadasGanadas: [], gano: false, posicion: 2 }
  const Game = () => {
     let tiradasHabilitadas = []
-    const [dadosValor, setDadosValor] = useState([0,0,0,0,0,0,0])
-    const [jugadas, setJugadas] = useState(tiradas)
+    const [dadosValor, setDadosValor] = useState([0,0,0,0,0,0])
+    //const [jugadas, setJugadas] = useState([])
 
     useEffect(() => {    
         inicializarTiradas()
@@ -22,59 +21,34 @@ import { useEffect } from 'react';
 
     const handleDices = (event) => {
         event.preventDefault()
-        let dices = []
-        for(let i=0; i<7; i++){
-            let number = Math.floor(Math.random() * 6) + 1
-            dices.push(number)
-        }
-        setDadosValor(dices)
-        dices = []
+        tiradaValues()
         tiradasDisponibles()
     }
 
-    const tiradasDisponibles = () => {}
-    
-    const cantidadDe = (numero, tirada) => {
-       if(!tirada.yaJugado){
-           let filtro = dadosValor.filter(d => d == numero)
-       }
-    }
-
-    const handleEscalera = () => {
-       const escalera =  dadosValor.sort(function(a, b){return b - a});
-        let esEscaleraDices = esEscalera(escalera, 1) || esEscalera(escalera, 2) 
-        console.log("esEscaleraDices")
-        console.log(esEscaleraDices)
-    }
-
-    const esEscalera = (escalera, numero) =>{
-        let valor = true
-        n = numero;
-        for(let i=0; i<7; i++){
-            valor= valor && escalera[i] == n
-            n++
+    const tiradaValues = () => {
+        let dices = []
+        for(let i=0; i<6; i++){
+            let number = Math.floor(Math.random() * 6) + 1
+            dices.push(number)
         }
-        return valor;
+        setDadosValor(dices);
     }
 
-    const esPoker = () => {
-
+    const tiradasDisponibles = () => {
+        let count = {};
+        dadosValor.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+        console.log(count)
     }
-
-    const esFull = () => {
-
-    }
-
-
+    
     return(
         <>
             <h1>Generala Solitario</h1>
-            <div>Dado1: <Button variant="contained">{dadosValor[1]}</Button> </div>
-            <div>Dado2: <Button variant="contained">{dadosValor[2]}</Button> </div>
-            <div>Dado3: <Button variant="contained">{dadosValor[3]}</Button> </div>
-            <div>Dado4: <Button variant="contained">{dadosValor[4]}</Button> </div>
-            <div>Dado5: <Button variant="contained">{dadosValor[5]}</Button> </div>
-            <div>Dado6: <Button variant="contained">{dadosValor[6]}</Button> </div>
+            <div>Dado1: <Button variant="contained">{dadosValor[0]}</Button> </div>
+            <div>Dado2: <Button variant="contained">{dadosValor[1]}</Button> </div>
+            <div>Dado3: <Button variant="contained">{dadosValor[2]}</Button> </div>
+            <div>Dado4: <Button variant="contained">{dadosValor[3]}</Button> </div>
+            <div>Dado5: <Button variant="contained">{dadosValor[4]}</Button> </div>
+            <div>Dado6: <Button variant="contained">{dadosValor[5]}</Button> </div>
             <Button variant="contained" onClick={handleDices}>Tirar Dado</Button>
             <table >
             <tbody>
