@@ -31,16 +31,21 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Solo1'),
+  createData('Solo2'),
+  createData('Solo3'),
+  createData('Solo4'),
+  createData('Solo5'),
+  createData('Solo6'),
+  createData('Escalera'),
+  createData('Poker'),
+  createData('Full'),
+  createData('Generala'),
 ];
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    maxWidth: 400,
   },
 });
 
@@ -48,15 +53,12 @@ const TableGame = () => {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer >
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Player</StyledTableCell>
-            <StyledTableCell align="right">Solo 1</StyledTableCell>
-            <StyledTableCell align="right">Solo 2</StyledTableCell>
-            <StyledTableCell align="right">Solo 3</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Jugada</StyledTableCell>
+            <StyledTableCell align="right">Puntaje</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -65,10 +67,7 @@ const TableGame = () => {
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">0</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
