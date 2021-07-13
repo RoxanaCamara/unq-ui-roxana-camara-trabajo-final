@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { useEffect } from 'react';
+import { SortByAlphaRounded } from '@material-ui/icons';
 
  const Game = () => {
-    let tiradasHabilitadas = []
+
+    const nombreTiradas = {
+         solo1 : 0,
+         solo2 : 0,
+         solo3 : 0,
+         solo4 : 0,
+         solo5 : 0,
+         solo6 : 0,
+         escalera: 0,
+         poker : 0,
+         full : 0,
+         generala : 0 }
+
+    const [tiradas, settiradas] = useState(nombreTiradas)
+    const [cantRepetidos, setcantRepetidos] = useState({})
     const [dadosValor, setDadosValor] = useState([0,0,0,0,0,0])
-    //const [jugadas, setJugadas] = useState([])
-
-    useEffect(() => {    
-        inicializarTiradas()
-    }, [])
-
-    const inicializarTiradas = () => {
-        const nombreTiradas = [ "solo1", "solo2","solo3","solo4","solo5","solo6", "escalera", "poker", "full", "generala" ]
-        for(let i=0; i<nombreTiradas.length; i++){
-            let tirada = { nombreTirada: nombreTiradas[i] , puntaje: 0 , yaJugado: false}
-            tiradasHabilitadas.push(tirada)
-        }
-    }
-
-    const handleDices = (event) => {
-        event.preventDefault()
-        tiradaValues()
-        tiradasDisponibles()
-    }
 
     const tiradaValues = () => {
         let dices = []
@@ -32,13 +28,76 @@ import { useEffect } from 'react';
             dices.push(number)
         }
         setDadosValor(dices);
+        console.log("dadosValor")
+        console.log(dadosValor)
     }
 
-    const tiradasDisponibles = () => {
+    const cantidadDeRepetidos = () => {
         let count = {};
-        dadosValor.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+        dadosValor.forEach(function(i) { count[i] = (count[i]|| 0) + 1;});
         console.log(count)
+        setcantRepetidos(count)
+        console.log("cantRepetidos")
+        console.log(cantRepetidos)  
     }
+
+    const handleDices = (event) => {
+        event.preventDefault()
+        tiradaValues()
+        cantidadDeRepetidos()
+        tiradasDisponibles()
+    }
+ 
+    const tiradasDisponibles = () => {
+        console.log("cantRepetidos")
+        console.log(cantRepetidos)
+        for (const property in cantRepetidos) {
+            soloDe(property, cantRepetidos[property])
+            console.log(`${property}: ${cantRepetidos[property]}`);
+        }
+    }
+
+    const soloDe = (d, c) => {
+        let num = parseInt(d)
+        let cant = parseInt(c)
+        console.log(num, cant )
+        let n = num * cant
+        switch (num) {
+            case 1 :
+                settiradas( {...tiradas, solo1: n })
+              console.log(' solo1');
+              break;
+            case 2 :
+                settiradas( {...tiradas, solo2: n })
+              console.log(' solo2');
+              break;
+            case 3 :
+                settiradas( {...tiradas, solo3: n })
+              console.log(' solo3');
+              break;
+            case 4 :
+                settiradas( {...tiradas, solo4: n })
+            console.log(' solo4');
+              break;
+            case 5 :
+                settiradas( {...tiradas, solo5: n })
+                console.log(' solo5');
+                break;
+            case 6 :
+                settiradas( {...tiradas, solo6: n })
+                console.log(' solo6');
+                break;
+            default:
+              console.log('No hago nada ' + num + '.');
+          }        
+        console.log(tiradas)
+    }
+    
+    const esGenerala = () => {
+       
+    }
+
+    const {solo1, solo2, solo3, solo4, solo5, solo6 } = tiradas
     
     return(
         <>
@@ -67,15 +126,12 @@ import { useEffect } from 'react';
                 </tr>
                 <tr>
                     <td>Jose Luis</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td> {solo1} </td>
+                    <td> {solo2} </td>
+                    <td> {solo3} </td>
+                    <td> {solo4} </td>
+                    <td> {solo5} </td>
+                    <td> {solo6} </td>
                 </tr>  
                 </tbody>
             </table>
