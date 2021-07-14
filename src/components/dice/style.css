@@ -54,17 +54,6 @@
     justify-content: center;
 }
 
-.nono {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: center;
-    flex-wrap: wrap;
-    align-content: center;
-    font-family: 'Open Sans', sans-serif;
-    background: linear-gradient(top, #222, #333);
-}
-
 [class$="face"] {
     margin: 16px;
     padding: 4px;
