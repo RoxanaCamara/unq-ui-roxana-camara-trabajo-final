@@ -6,6 +6,7 @@ import { Contenedor } from '../nav/Contenedor';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SessionContext } from '../helper/Session';
+import { BotonTipoDeTirada } from './BotonTipoDeTirada';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Game = () => {
-
     
     const [oportunidades, setOportunidades] = useState(1)
     const [inicioPartida, setinicioPartida] = useState(false)
@@ -22,7 +22,7 @@ const Game = () => {
     const { dadosGuardados, tiradas } = state
     const { settiradas } = actions
     const classes = useStyles();
-    const [dadosValor, setDadosValor] = useState([])
+    
 
     //setea los dados randoms
     const tiradaValues = () => {
@@ -43,16 +43,7 @@ const Game = () => {
     }
 
 
-    //setea en tiradas el vlaor de la jugada solo y su numero
-    const handleSolo = (num) => {
-        let newTirada = tiradas
-        let n = num - 1
-        let cant = cantidadDeRepetidos(num)
-        let valor = cant * num
-        newTirada[n].value = valor
-        settiradas(newTirada)
-        reinicio()
-    }
+    
     const reinicio = () =>{
         setinicioPartida(false)
         setDadosValor([])
@@ -154,25 +145,11 @@ const Game = () => {
                             <div>
                                 <h2>Jugadas disponibles</h2>
                                 {
-                                    sinRepetidosDadosvalor.map((i, index) => (
-                                        <Button variant="contained" color="primary" key={index} onClick={e => { handleSolo(i) }} >Solo {i} </Button>))
+                                    dadosValor.map((d, index) => (
+                                        <BotonTipoDeTirada dadosValor={d} index={index} />
+                                    ))
                                 }
-                                {
-                                    &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(6, 40) }} >escalera</Button>
-                                }
-                                {
-                                    &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(7, 40) }} >poker</Button>
-                                }
-                                {
-                                    &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(8, 40) }} >full</Button>
-                                }
-                                {
-                                    &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales((9, 40)) }} >generala</Button>
-                                }                            
+                                                        
                             </div>
                             }
                         </Grid>
