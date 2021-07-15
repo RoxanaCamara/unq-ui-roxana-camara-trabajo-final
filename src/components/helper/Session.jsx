@@ -14,6 +14,7 @@ const nombreTiradas = [
     { name: 'generala', value: 0, jugado: false }
 ]
 
+
 export const SessionContext = createContext({
     state: {
         dadosGuardados: dadosSeleccionados,
@@ -48,3 +49,29 @@ export const SessionProvider = ({ children }) => {
         {children}
     </SessionContext.Provider>
 }
+
+
+/*const useValores =  () => {
+
+    const { state, actions } = useContext(SessionContext)
+    const { tiradas, dadosValor } = state
+    const { settiradas } = actions
+
+    const useValor = (index, ) => {
+
+        if( index == 6){
+
+        }
+        if( index == 7){
+            
+        }
+        if( index == 8){
+            
+        }
+        if( index == 9){
+            
+        }
+
+    } 
+
+}**/

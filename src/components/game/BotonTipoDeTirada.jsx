@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const BotonTipoDeTirada = ({ jugada }) => {
+export const BotonTipoDeTirada = ({ num }) => {
 
     const { state, actions } = useContext(SessionContext)
     const { dadosValor } = state
@@ -16,9 +16,6 @@ export const BotonTipoDeTirada = ({ jugada }) => {
         reinicio()
     }
 
-
-
-    const { name, value, jugado} = jugada
     return (
         <div>
             {
