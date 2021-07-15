@@ -4,17 +4,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faPencilRuler } from '@fortawesome/free-solid-svg-icons'
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   toolbar: {
     minHeight: 109,
@@ -30,16 +26,28 @@ const useStyles = makeStyles((theme) => ({
 
 export const Contenedor = ({ children }) => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const handleRules = (event) => {
+      history.push("/reglas");
+    };
+
+    const handleGenerala = (event) => {
+      history.push("/generala");
+    };
+
     return (
         <div>
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar className={classes.toolbar}>
-                        <Typography className={classes.title} variant="h4" noWrap>
-                            Generala <FontAwesomeIcon icon={faDice} size="lg" />
+                        <Typography className={classes.title} variant="h4" noWrap onClick={handleGenerala}>
+                            Generala
+                             <FontAwesomeIcon icon={faDice} size="lg" />
                         </Typography>
                         <IconButton aria-label="search" color="inherit" >
-                        <Typography className={classes.title} variant="h5" noWrap>Reglas 
+                        <Typography className={classes.title} variant="h5" noWrap onClick={handleRules}>
+                          Reglas
                         <FontAwesomeIcon icon={faPencilRuler} size="lg" />
                         </Typography>
                         </IconButton>

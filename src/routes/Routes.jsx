@@ -7,18 +7,21 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import Game from "../components/game/Game";
+import { SessionProvider } from "../components/helper/Session";
 import Rules from "../components/rules/Rules";
 
 
-const Routes = () => {
+const GeneralaRoutes = () => {
   return (
     <Router>
+      <SessionProvider>
         <Switch>
-            <Route exact path="/Reglas" component={Rules} />
-            <Route exact path="/Generala" component={Game} />
-            <Route exact path="/" component={App} />
+          <Route exact path="/reglas" component={Rules} />
+          <Route exact path="/generala" component={Game} />
+          <Route exact path="/" component={Game} />
         </Switch>
+      </SessionProvider>
     </Router>
   );
 }
-export default Routes;
+export default GeneralaRoutes;

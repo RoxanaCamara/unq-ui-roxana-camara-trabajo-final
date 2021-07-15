@@ -26,22 +26,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Solo1'),
-  createData('Solo2'),
-  createData('Solo3'),
-  createData('Solo4'),
-  createData('Solo5'),
-  createData('Solo6'),
-  createData('Escalera'),
-  createData('Poker'),
-  createData('Full'),
-  createData('Generala'),
-];
 
 const useStyles = makeStyles({
   table: {
@@ -49,9 +34,11 @@ const useStyles = makeStyles({
   },
 });
 
-const TableGame = () => {
+const TableGame = ({ lsTiradas }) => {
+    
+  console.log(lsTiradas)
   const classes = useStyles();
-
+  
   return (
     <TableContainer >
       <Table className={classes.table} aria-label="customized table">
@@ -62,12 +49,12 @@ const TableGame = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {lsTiradas.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">0</StyledTableCell>
+              <StyledTableCell align="right">{row.value}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
