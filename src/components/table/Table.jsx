@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { SessionContext } from '../helper/Session';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -34,9 +35,10 @@ const useStyles = makeStyles({
   },
 });
 
-const TableGame = ({ lsTiradas }) => {
+const TableGame = () => {
     
-  console.log(lsTiradas)
+  const { state } = useContext(SessionContext)
+  const {  tiradas } = state
   const classes = useStyles();
   
   return (
@@ -49,7 +51,7 @@ const TableGame = ({ lsTiradas }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {lsTiradas.map((row) => (
+          {tiradas.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}

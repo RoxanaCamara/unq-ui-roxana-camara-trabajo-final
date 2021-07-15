@@ -14,29 +14,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Game = () => {
-    const nombreTiradas = [
-        { name: 'solo1', value: 0 },
-        { name: 'solo2', value: 0 },
-        { name: 'solo3', value: 0 },
-        { name: 'solo4', value: 0 },
-        { name: 'solo5', value: 0 },
-        { name: 'solo6', value: 0 },
-        { name: 'escalera', value: 0 },
-        { name: 'poker', value: 0 },
-        { name: 'full', value: 0 },
-        { name: 'generala', value: 0 }
-    ]
 
-    const [inicioPartida, setinicioPartida] = useState(false)
-    const { state } = useContext(SessionContext)
-    const { dadosGuardados } = state
-    const classes = useStyles();
+    
     const [oportunidades, setOportunidades] = useState(1)
-    const [tiradas, settiradas] = useState(nombreTiradas)
-    const [cantRepetidos, setcantRepetidos] = useState({})
+    const [inicioPartida, setinicioPartida] = useState(false)
+    const { state, actions } = useContext(SessionContext)
+    const { dadosGuardados, tiradas } = state
+    const { settiradas } = actions
+    const classes = useStyles();
     const [dadosValor, setDadosValor] = useState([])
-
-
 
     //setea los dados randoms
     const tiradaValues = () => {
@@ -56,25 +42,25 @@ const Game = () => {
         }
     }
 
-    ///hace un  object array de dados y su cantidad de repetidos
-    const cantidadDeRepetidos = () => {
-        let count = {};
-        dadosValor.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
-        setcantRepetidos(count)
-    }
 
     //setea en tiradas el vlaor de la jugada solo y su numero
     const handleSolo = (num) => {
         let newTirada = tiradas
         let n = num - 1
-        let cant = parseInt(cantRepetidos[num])
+        let cant = cantidadDeRepetidos(num)
         let valor = cant * num
         newTirada[n].value = valor
         settiradas(newTirada)
+        reinicio()
+    }
+    const reinicio = () =>{
+        setinicioPartida(false)
+        setDadosValor([])
+        setOportunidades(0)
     }
 
     const handleDadosEstaticos = () => {
-        if(oportunidades <= 3 ){
+        if(oportunidades < 3 ){
             setOportunidades(oportunidades + 1)        
             let dn = dadosValor
             for (let i = 0; i < 5; i++) {
@@ -84,27 +70,14 @@ const Game = () => {
                 }
             }
             setDadosValor(dn)
-        }else{
-            setOportunidades(0)
-            setinicioPartida(!inicioPartida)
         }
     }
 
-    const handleTiradasEspeciales = (index, armada) => {
+    const handleTiradasEspeciales = (index, puntaje) => {
         let newTirada = tiradas
-        newTirada[index].value = armada
+        newTirada[index].value = puntaje
         settiradas(newTirada)
-    }
-
-    const esGenerala = () => {
-        // ejemplo [4,4,4,4,4]
-        let bool = false
-        let n = 1
-        for (let i = 0; i < 5; i++) {
-            bool = bool || (dadosValor[i] == 5)
-            n++
-        }
-        return bool
+        reinicio()
     }
 
     const esEscalera = () => {
@@ -118,14 +91,26 @@ const Game = () => {
         return bool
     }
 
-    const esFull = () => {
-        // ejemplo [3,3,3,1,1]
-        return (cantRepetidos[0] == 3 || cantRepetidos[1] == 3) && (cantRepetidos[0] == 2 || cantRepetidos[1] == 2)
+    const esGenerala = () => {
+        return existeEsaCAntRepetidos(5)
     }
 
     const esPoker = () => {
-        // ejemplo [1,1,1,1,5]
-        return cantRepetidos[2] == 4 || cantRepetidos[1] == 4
+        return existeEsaCAntRepetidos(4) && existeEsaCAntRepetidos(1)
+    }
+
+    const esFull = () => {
+        return existeEsaCAntRepetidos(3) && existeEsaCAntRepetidos(2)
+    }
+
+    const existeEsaCAntRepetidos = (num) => {
+        let valor = false
+        dadosValor.forEach(function (i) {  valor = valor || cantidadDeRepetidos(i) == num });
+        return valor
+    }
+
+    const cantidadDeRepetidos = () => {
+       return dadosValor.filter(n => n == specificNumber).length
     }
 
     let myArray = dadosValor;
@@ -138,7 +123,7 @@ const Game = () => {
     
     useEffect(() => {
         tiradaValues()   
-    }, []
+    }, [inicioPartida]
     )
 
     return (
@@ -152,9 +137,10 @@ const Game = () => {
                                 inicioPartida && <Dices listNums={dadosValor} />
                             }
                             {
-                                inicioPartida && oportunidades <= 3 &&
+                                inicioPartida && oportunidades < 3 &&
                                 <div>
                                 <Button variant="contained" onClick={handleDadosEstaticos}>Tirar Dado otra vez</Button>
+                                <h4>Oportunidad {oportunidades} de 3 </h4>
                                 <p>Elija los dados que no quiere que sean cambiados</p>
                                 </div>
                             }
@@ -172,26 +158,26 @@ const Game = () => {
                                         <Button variant="contained" color="primary" key={index} onClick={e => { handleSolo(i) }} >Solo {i} </Button>))
                                 }
                                 {
-                                    esEscalera() &&
+                                    &&
                                     <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(6, 40) }} >escalera</Button>
                                 }
                                 {
-                                    esPoker() &&
+                                    &&
                                     <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(7, 40) }} >poker</Button>
                                 }
                                 {
-                                    esFull() &&
+                                    &&
                                     <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(8, 40) }} >full</Button>
                                 }
                                 {
-                                    esGenerala() &&
+                                    &&
                                     <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales((9, 40)) }} >generala</Button>
                                 }                            
                             </div>
                             }
                         </Grid>
                         <Grid item xs={6} >
-                            <TableGame lsTiradas={tiradas} />
+                            <TableGame />
                         </Grid>
                     </Grid>
                 </div>
