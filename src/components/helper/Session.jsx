@@ -2,16 +2,16 @@ import { createContext, useContext, useState } from "react";
 
 const dadosSeleccionados = [0,0,0,0,0]
 const nombreTiradas = [
-    { name: 'solo1', value: 0, jugado: false },
-    { name: 'solo2', value: 0, jugado: false },
-    { name: 'solo3', value: 0, jugado: false },
-    { name: 'solo4', value: 0, jugado: false },
-    { name: 'solo5', value: 0, jugado: false },
-    { name: 'solo6', value: 0, jugado: false },
-    { name: 'escalera', value: 0, jugado: false },
-    { name: 'poker', value: 0, jugado: false },
-    { name: 'full', value: 0, jugado: false },
-    { name: 'generala', value: 0, jugado: false }
+    { name: 'solo1', value: 0 },
+    { name: 'solo2', value: 0 },
+    { name: 'solo3', value: 0 },
+    { name: 'solo4', value: 0 },
+    { name: 'solo5', value: 0 },
+    { name: 'solo6', value: 0 },
+    { name: 'escalera', value: 0 },
+    { name: 'poker', value: 0 },
+    { name: 'full', value: 0 },
+    { name: 'generala', value: 0 }
 ]
 
 

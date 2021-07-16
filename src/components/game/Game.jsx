@@ -10,24 +10,24 @@ import { SessionContext } from '../helper/Session';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-    }
+    },
+    espaciado: {
+        margin: theme.spacing(3, 3, 2, 4),
+      },
 }));
 
 const Game = () => {
 
     const [oportunidades, setOportunidades] = useState(1)
     const [inicioPartida, setinicioPartida] = useState(false)
-
     const { state, actions } = useContext(SessionContext)
     const { dadosGuardados, tiradas } = state
     const { settiradas } = actions
-
     const classes = useStyles();
-
     const [dadosValor, setDadosValor] = useState([])
     const [tiradasEspeciales, settiradasEspeciales] = useState( {esclaera: false, poker: false, full: false ,generala: false}  )
+    const  { escalera, poker , full, generala} = tiradasEspeciales
 
-    //setea los dados randoms
     const tiradaValues = () => {
         let dices = []
         for (let i = 0; i < 5; i++) {
@@ -55,6 +55,7 @@ const Game = () => {
         settiradas(newTirada)
         reinicio()
     }
+
     const reinicio = () =>{
         setinicioPartida(false)
         setDadosValor([])
@@ -72,6 +73,8 @@ const Game = () => {
                 }
             }
             setDadosValor(dn)
+        }else{
+           
         }
     }
 
@@ -84,19 +87,11 @@ const Game = () => {
 
     const esEscalera = () => {
         // ejemplo [1,2,3,4,5]      
-        let bool = true
-        let ordenado = dadosValor.sort()
-        let n = 1
-        for (let i = 0; i < 5; i++) {
-            bool = bool && (ordenado[i] == n)
-            n++
-        }
-        return bool
+        return false
     }
-
+        
     const esGenerala = () => {
-        let n =existeEsaCAntRepetidos(5) 
-        return n
+        return existeEsaCAntRepetidos(5)
     }
 
     const esPoker = () => {
@@ -131,33 +126,37 @@ const Game = () => {
     )
     
     useEffect(() => {
-        tiradaValues()   
+        tiradaValues() 
     }, [inicioPartida]
     )
 
-    const  nnn= noseComoLlamarlo()
-    const  { escalera, poker , full, generala} = tiradasEspeciales
+    useEffect(() => {
+        tiradaValues()   
+    }, [inicioPartida]
+    )
+    
+    let numerosDisponibles = noseComoLlamarlo()
     return (
         <>
             <Contenedor>
                 <div className={classes.root}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={12}>
                        
                         <Grid item xs={6}>
                             {
-                                inicioPartida && <Dices listNums={dadosValor} />
+                                inicioPartida && <Dices className={classes.root} listNums={dadosValor} />
                             }
                             {
                                 inicioPartida && oportunidades < 3 &&
                                 <div>
-                                <Button variant="contained" onClick={handleDadosEstaticos}>Tirar Dado otra vez</Button>
+                                <Button variant="contained" className={classes.root} onClick={handleDadosEstaticos}>Tirar Dado otra vez</Button>
                                 <h4>Oportunidad {oportunidades} de 3 </h4>
                                 <p>Elija los dados que no quiere que sean cambiados</p>
                                 </div>
                             }
                             {
                                 !inicioPartida &&
-                                <Button variant="contained" onClick={handleDices}>Inicicar</Button>
+                                <Button variant="contained"  className={classes.espaciado}  onClick={handleDices}>Inicicar</Button>
                             }
                         </Grid>
                         <Grid item xs={6}>
@@ -165,30 +164,30 @@ const Game = () => {
                             <div>
                                 <h2>Jugadas disponibles</h2>
                                 {
-                                    nnn.map((i, index) => (
-                                     <Button variant="contained" color="primary" key={index} onClick={e => { handleSolo(i) }} >Solo {i} index {i-1} </Button>) )
+                                    numerosDisponibles.map((i, index) => (
+                                     <Button variant="contained" className={classes.root} color="primary" key={index} onClick={e => { handleSolo(i) }} >Solo {i}</Button>) )
                                 }
                                 {
                                     (tiradas[6].value == 0 && escalera ) &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(6, 40) }} >escalera</Button>
+                                    <Button variant="contained" color="primary" className={classes.root} onClick={e => { handleTiradasEspeciales(6, 20) }} >escalera</Button>
                                 }
                                 {
                                      (tiradas[7].value == 0 && poker ) &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(7, 40) }} >poker</Button>
+                                    <Button variant="contained" color="primary" className={classes.root}  onClick={e => { handleTiradasEspeciales(7, 40) }} >poker</Button>
                                 }
                                 {
                                      (tiradas[8].value == 0 && full ) &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(8, 40) }} >full</Button>
+                                    <Button variant="contained" color="primary" className={classes.root} onClick={e => { handleTiradasEspeciales(8, 30) }} >full</Button>
                                 }
                                 {
                                      (tiradas[9].value == 0 && generala ) &&
-                                    <Button variant="contained" color="primary" onClick={e => { handleTiradasEspeciales(9, 40) }} >generala</Button>
+                                    <Button variant="contained" color="primary" className={classes.root} onClick={e => { handleTiradasEspeciales(9, 50) }} >generala</Button>
                                 }                            
                             </div>
                             }
                         </Grid>
                         <Grid item xs={6} >
-                            <TableGame />
+                            <TableGame  />
                         </Grid>
                     </Grid>
                 </div>

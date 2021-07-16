@@ -29,11 +29,12 @@ const StyledTableRow = withStyles((theme) => ({
 
 
 
-const useStyles = makeStyles({
+const useStyles  = makeStyles((theme) => ({
   table: {
     maxWidth: 400,
-  },
-});
+    margin: theme.spacing(3, 3, 2, 4)
+  }
+}))
 
 const TableGame = () => {
     
@@ -42,7 +43,7 @@ const TableGame = () => {
   const classes = useStyles();
   
   return (
-    <TableContainer >
+    <TableContainer  >
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
