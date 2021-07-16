@@ -25,7 +25,7 @@ const Game = () => {
     const { settiradas } = actions
     const classes = useStyles();
     const [dadosValor, setDadosValor] = useState([])
-    const [tiradasEspeciales, settiradasEspeciales] = useState( {esclaera: false, poker: false, full: false ,generala: false}  )
+    const [tiradasEspeciales, settiradasEspeciales] = useState( {escalera: false, poker: false, full: false ,generala: false}  )
     const  { escalera, poker , full, generala} = tiradasEspeciales
 
     const tiradaValues = () => {
