@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Checkbox from '@material-ui/core/Checkbox';
 import { SessionContext } from '../helper/Session';
+import { RowTableGame } from './Row';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -32,7 +34,6 @@ const StyledTableRow = withStyles((theme) => ({
 const useStyles  = makeStyles((theme) => ({
   table: {
     maxWidth: 400,
-    margin: theme.spacing(3, 3, 2, 4)
   }
 }))
 
@@ -41,6 +42,7 @@ const TableGame = () => {
   const { state } = useContext(SessionContext)
   const {  tiradas } = state
   const classes = useStyles();
+
   
   return (
     <TableContainer  >
@@ -52,12 +54,14 @@ const TableGame = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tiradas.map((row) => (
+          {tiradas.map((row, index) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.name} 
               </StyledTableCell>
-              <StyledTableCell align="right">{row.value}</StyledTableCell>
+              <StyledTableCell align="right">{row.value}  
+              </StyledTableCell>
+              <RowTableGame tirada={row} index={index} />
             </StyledTableRow>
           ))}
         </TableBody>

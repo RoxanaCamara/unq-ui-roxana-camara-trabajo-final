@@ -17,7 +17,6 @@ const GeneralaRoutes = () => {
       <SessionProvider>
         <Switch>
           <Route exact path="/reglas" component={Rules} />
-          <Route exact path="/generala" component={Game} />
           <Route exact path="/" component={Game} />
         </Switch>
       </SessionProvider>

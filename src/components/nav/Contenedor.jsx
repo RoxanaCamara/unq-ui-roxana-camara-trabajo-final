@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faPencilRuler } from '@fortawesome/free-solid-svg-icons'
 import { Link, useHistory } from 'react-router-dom';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +34,7 @@ export const Contenedor = ({ children }) => {
     };
 
     const handleGenerala = (event) => {
-      history.push("/generala");
+      history.push("/");
     };
 
     return (
@@ -54,11 +55,11 @@ export const Contenedor = ({ children }) => {
                     </Toolbar>
                 </AppBar>
             </div>
-
-
+            <Container fixed>
             <main>
                 {children}
             </main>
+            </Container>
 
         </div>
     )
