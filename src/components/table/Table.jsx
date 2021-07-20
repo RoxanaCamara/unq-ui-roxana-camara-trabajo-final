@@ -7,9 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import { SessionContext } from '../helper/Session';
-import { RowTableGame } from './Row';
+import { faBan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import TiradaCheck from './TiradaCheck';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -29,8 +30,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
-
 const useStyles  = makeStyles((theme) => ({
   table: {
     maxWidth: 400,
@@ -40,9 +39,8 @@ const useStyles  = makeStyles((theme) => ({
 const TableGame = () => {
     
   const { state } = useContext(SessionContext)
-  const {  tiradas } = state
+  const {  tiradas , eliminarTirada} = state
   const classes = useStyles();
-
   
   return (
     <TableContainer  >
@@ -51,6 +49,7 @@ const TableGame = () => {
           <TableRow>
             <StyledTableCell>Jugada</StyledTableCell>
             <StyledTableCell align="right">Puntaje</StyledTableCell>
+           { eliminarTirada && <StyledTableCell align="right">Eliminar</StyledTableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,9 +58,18 @@ const TableGame = () => {
               <StyledTableCell component="th" scope="row">
                 {row.name} 
               </StyledTableCell>
-              <StyledTableCell align="right">{row.value}  
+              <StyledTableCell align="right">
+            {  row.played && row.value== 0 ?
+            <FontAwesomeIcon icon={faBan} size="lg" />
+            :
+            row.value
+            }  
               </StyledTableCell>
-              <RowTableGame tirada={row} index={index} />
+             { 
+             eliminarTirada && <StyledTableCell align="right">
+             <TiradaCheck tirada={row} index={index} />
+               </StyledTableCell>
+            }
             </StyledTableRow>
           ))}
         </TableBody>

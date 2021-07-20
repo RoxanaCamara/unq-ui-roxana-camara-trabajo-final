@@ -1,11 +1,12 @@
 import React from 'react'
 import { Grid } from '@material-ui/core';
 import { Dice } from './Dice'
+import Typography from '@material-ui/core/Typography';
 
 const Dices = ({ listNums }) => {
     let numsFor = listNums
     return (
-        <div>
+        <div> 
              <Grid container item xs={12} spacing={3}>
             {
                 numsFor.map(( i, index) => ( 
@@ -15,7 +16,8 @@ const Dices = ({ listNums }) => {
                     />
                 ))
             }  
-            </Grid>          
+            </Grid>      
+            <Typography variant="subtitle2" gutterBottom>* Elija los dados que no quiere que sean cambiados</Typography>  
         </div>
     )
 }

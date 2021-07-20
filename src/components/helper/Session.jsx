@@ -14,7 +14,6 @@ const nombreTiradas = [
     { name: 'generala', value: 0, played: false }
 ]
 
-
 export const SessionContext = createContext({
     state: {
         dadosGuardados: dadosSeleccionados,
@@ -53,4 +52,12 @@ export const SessionProvider = ({ children }) => {
     return <SessionContext.Provider value={{ state, actions }}>
         {children}
     </SessionContext.Provider>
+}
+
+export const useTiradas = () => {
+    
+    const login = () => {
+        return 
+    }
+    return { login }
 }

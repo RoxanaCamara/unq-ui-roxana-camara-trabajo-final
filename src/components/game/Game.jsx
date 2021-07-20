@@ -6,6 +6,8 @@ import { Contenedor } from '../nav/Contenedor';
 import { Box, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SessionContext } from '../helper/Session';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,6 +53,7 @@ const Game = () => {
         let cant = cantidadDeRepetidos(num)
         let valor = cant * num
         newTirada[n].value = valor
+        newTirada[n].played = true
         settiradas(newTirada)
         reinicio()
     }
@@ -163,18 +166,19 @@ const Game = () => {
                                 }
                             </Grid>
                             <Grid item xs={4} md={4}>
-                                <h2>Jugadas disponibles</h2>
+                            
                                 {
                                     inicioPartida && oportunidades <= 3 &&
                                     <div>
-                                        <Button variant="contained" className={classes.root} onClick={handleDadosEstaticos}>Tirar Dado otra vez</Button>
-                                        <h4>Oportunidad {oportunidades} de 3 </h4>
-                                        <p>Elija los dados que no quiere que sean cambiados</p>
+                                     <Typography variant="h3" component="h3">Jugadas disponibles</Typography>
+                                        <Button variant="contained" className={classes.root} onClick={handleDadosEstaticos}>Otro intento</Button>
+                                         <Typography variant="h5" component="h6">Oportunidad {oportunidades} de 3 </Typography>
+                                      
                                     </div>
                                 }
                                 {
                                     !inicioPartida &&
-                                    <Button variant="contained" className={classes.espaciado} onClick={handleDices}>Inicicar</Button>
+                                    <Button variant="contained" className={classes.espaciado} onClick={handleDices}>Tirar Dados</Button>
                                 }
                                 {inicioPartida &&
                                     <div>
