@@ -22,7 +22,8 @@ export const SessionContext = createContext({
         eliminarTirada: false,
         oportunidades: 1,
         inicioPartida: false,
-        tiradasEspeciales: { escalera: false, poker: false, full: false, generala: false }
+        tiradasEspeciales: { escalera: false, poker: false, full: false, generala: false },
+        finalizoJuego: false
     },
     actions: {
         setDadosGuardados: (num) => { },
@@ -30,18 +31,23 @@ export const SessionContext = createContext({
         setDadosValor: (nn) => { },
         seteliminarTirada: (nn) => { },
         setOportunidades: (nn) => { },
-        setinicioPartida : (nn) => { },
+        setinicioPartida: (nn) => { },
+        setfinalizoJuego: (nn) => { },
     }
 })
 
 export const SessionProvider = ({ children }) => {
     const [inicioPartida, setinicioPartida] = useState(false)
+    const [eliminarTirada, seteliminarTirada] = useState(false)
+
+    const [dadosGuardados, setDadosGuardados] = useState(dadosSeleccionados)
+    const [dadosValor, setDadosValor] = useState([])
+
     const [oportunidades, setOportunidades] = useState(1)
     const [tiradas, settiradas] = useState(nombreTiradas)
-    const [dadosValor, setDadosValor] = useState([])
+    
     const [tiradasEspeciales, settiradasEspeciales] = useState({ escalera: false, poker: false, full: false, generala: false })
-    const [dadosGuardados, setDadosGuardados] = useState(dadosSeleccionados)
-    const [eliminarTirada, seteliminarTirada] = useState(false)
+    const [finalizoJuego, setfinalizoJuego] = useState(false)
 
     const state = {
         dadosGuardados,
@@ -50,7 +56,8 @@ export const SessionProvider = ({ children }) => {
         eliminarTirada,
         oportunidades,
         inicioPartida,
-        tiradasEspeciales
+        tiradasEspeciales,
+        finalizoJuego
     }
 
     const actions = {
@@ -60,8 +67,10 @@ export const SessionProvider = ({ children }) => {
         seteliminarTirada,
         setOportunidades,
         setinicioPartida,
-        settiradasEspeciales
+        settiradasEspeciales,
+        setfinalizoJuego
     }
+    
     return <SessionContext.Provider value={{ state, actions }}> {children} </SessionContext.Provider>
 }
 
@@ -128,6 +137,10 @@ export const useTiradas = () => {
         return !bool
     }
 
+    const endGame = () => {
+       return !hayTiradasParaSacrificar()
+    }
+ 
     const cantidadDeRepetidos = (specificNumber) => {
         return dadosValor.filter(n => n == specificNumber).length
     }
@@ -167,7 +180,6 @@ export const useTiradas = () => {
             }
             setDadosValor(dn)
         }else{
-            console.log(oportunidades)
             let nn = hayTiradasParaSacrificar()
             seteliminarTirada(nn)
         }
@@ -178,6 +190,5 @@ export const useTiradas = () => {
         settiradasEspeciales({ escalera: esEscalera(), poker: esPoker(), full: esFull(), generala: esGenerala() })
     }
 
-    
-    return {changeValueDados ,tiradaValues,reinicio,  handleDadosEstaticos, handleSolo, handleTiradasEspeciales, handleDices, noseComoLlamarlo }
+    return {changeValueDados, endGame ,tiradaValues,reinicio,  handleDadosEstaticos, handleSolo, handleTiradasEspeciales, handleDices, noseComoLlamarlo }
 }

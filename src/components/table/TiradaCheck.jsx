@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
   const {  tiradas , eliminarTirada } = state
   const { seteliminarTirada, settiradas } = actions
   const [checked, setChecked ] = useState(false);
-  const { reinicio } = useTiradas()
+  const { reinicio, endGame } = useTiradas()
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -19,6 +19,10 @@ import Checkbox from '@material-ui/core/Checkbox';
     setChecked(!checked)
   }
 
+  
+  let valorBpool = endGame()
+  console.log("EndGameModal")
+  console.log(valorBpool)
   return (
     <>
       <Checkbox checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} /> 
