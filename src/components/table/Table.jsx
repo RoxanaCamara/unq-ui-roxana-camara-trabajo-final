@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,11 +6,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { SessionContext } from '../helper/Session';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TiradaCheck from './TiradaCheck';
+import { Box } from '@material-ui/core';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -37,7 +37,6 @@ const useStyles  = makeStyles((theme) => ({
 }))
 
 const TableGame = () => {
-    
   const { state } = useContext(SessionContext)
   const {  tiradas , eliminarTirada} = state
   const classes = useStyles();
@@ -59,19 +58,34 @@ const TableGame = () => {
                 {row.name} 
               </StyledTableCell>
               <StyledTableCell align="right">
-            {  row.played && row.value== 0 ?
-            <FontAwesomeIcon icon={faBan} size="lg" />
-            :
-            row.value
-            }  
+                {row.value}  
               </StyledTableCell>
              { 
-             eliminarTirada && <StyledTableCell align="right">
+             eliminarTirada  &&
+             <>
+             {   
+               !row.played ?
+              <StyledTableCell align="right">
              <TiradaCheck tirada={row} index={index} />
                </StyledTableCell>
+               :
+               <StyledTableCell align="right">
+               <FontAwesomeIcon icon={faBan} size="lg" />
+                 </StyledTableCell> }
+            </>
             }
             </StyledTableRow>
-          ))}
+          ))}          
+          <StyledTableRow>
+              <StyledTableCell component="th">
+              <Box fontWeight="fontWeightBold" fontSize={15}>
+              Total 
+              </Box>
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                0  
+              </StyledTableCell>
+            </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>
