@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core';
-import '../dice/Style.css'
+import '../dice/style.css'
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDices } from '../helper/Session';
 
