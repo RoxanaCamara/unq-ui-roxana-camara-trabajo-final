@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,7 +8,8 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { useTiradas } from '../helper/Session';
+import { SessionContext, useJugadas, usePartida, useTiradas } from '../helper/Session';
+import { useHistory } from 'react-router-dom';
 
 const styles = (theme) => ({
   root: {
@@ -51,30 +52,26 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
  const EndGameModal = () => {
-    const {endGame } = useTiradas()
 
+  const { state } = useContext(SessionContext)
+  const { finPartida  } = state
+  const { initGame } = useJugadas()
+  const history = useHistory()
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-      let valorBpool = endGame()
-      console.log("EndGameModal")
-      console.log(valorBpool)
-    setOpen(valorBpool);
-  };
   const handleClose = () => {
-    setOpen(false);
+    initGame()
+    history.push("/")
   };
 
   return (
     <div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={finPartida }>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Terminado!
         </DialogTitle>
         <DialogContent dividers>
         <Typography variant="h2" component="h2" gutterBottom>
-        Total de  puntos logrados 999!
+        Total de  puntos logrados!
         </Typography>
           <Typography gutterBottom>
               Espero te hayas divertido como yo!

@@ -1,29 +1,21 @@
 import React, { useContext, useState } from 'react'
-import { SessionContext, useTiradas } from '../helper/Session';
+import { SessionContext, useJugadas } from '../helper/Session';
 import Checkbox from '@material-ui/core/Checkbox';
 
- const TiradaCheck = ({tirada, index}) => {
-  const { state, actions } = useContext(SessionContext)
-  const {  tiradas , eliminarTirada } = state
-  const { seteliminarTirada, settiradas } = actions
+ const TiradaCheck = ({ index}) => {
+
   const [checked, setChecked ] = useState(false);
-  const { reinicio, endGame } = useTiradas()
+  const { jugadaEliminada, } = useJugadas()
 
   const handleChange = (event) => {
     event.preventDefault()
     if(event.target.checked){
-      tiradas[index].played = true
-      seteliminarTirada(false)
-      reinicio()
+      jugadaEliminada(index)
     }
     setChecked(!checked)
   }
 
-  
-  let valorBpool = endGame()
-  console.log("EndGameModal")
-  console.log(valorBpool)
-  return (
+    return (
     <>
       <Checkbox checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} /> 
     </>

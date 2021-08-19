@@ -1,110 +1,90 @@
 import { createContext, useContext, useState } from "react";
 
-const dadosSeleccionados = [0,0,0,0,0]
-const nombreTiradas = [
-    { name: 'solo1', value: 0, played: false },
-    { name: 'solo2', value: 0, played: false },
-    { name: 'solo3', value: 0, played: false },
-    { name: 'solo4', value: 0, played: false },
-    { name: 'solo5', value: 0, played: false },
-    { name: 'solo6', value: 0, played: false },
-    { name: 'escalera', value: 0, played: false },
-    { name: 'poker', value: 0, played: false },
-    { name: 'full', value: 0, played: false },
-    { name: 'generala', value: 0, played: false }
+const puntajeDefault = [
+    { name: 'Solo 1', valor: 0, played: false },
+    { name: 'Solo 2', valor: 0, played: false },
+    { name: 'Solo 3', valor: 0, played: false },
+    { name: 'Solo 4', valor: 0, played: false },
+    { name: 'Solo 5', valor: 0, played: false },
+    { name: 'Solo 6', valor: 0, played: false },
+    { name: 'Escalera', valor: 0, played: false },
+    { name: 'Poker', valor: 0, played: false },
+    { name: 'Full', valor: 0, played: false },
+    { name: 'Generala', valor: 0, played: false }
 ]
 
 export const SessionContext = createContext({
     state: {
-        dadosGuardados: dadosSeleccionados,
-        tiradas:nombreTiradas,
-        dadosValor: [],
-        eliminarTirada: false,
-        oportunidades: 1,
-        inicioPartida: false,
-        tiradasEspeciales: { escalera: false, poker: false, full: false, generala: false },
-        finalizoJuego: false
+        iniciaPartida: false,
+        finTurno: false,
+        finPartida: false,
+        dados: [],
+        puntaje: puntajeDefault,
+        eliminarJugada: false,
+        oportunidades: 1
     },
     actions: {
-        setDadosGuardados: (num) => { },
-        settiradas: (nn) => { },
-        setDadosValor: (nn) => { },
-        seteliminarTirada: (nn) => { },
-        setOportunidades: (nn) => { },
-        setinicioPartida: (nn) => { },
-        setfinalizoJuego: (nn) => { },
+        setInicioPartida: (nn) => { },
+        setFinTurno: (nn) => { },
+        setFinPartida: (nn) => { },
+        setDados: (nn) => { },
+        setpuntaje: (nn) => { },
+        setEliminarJugada: (nn) => { },
+        setOportunidades: (nn) => { }
     }
 })
 
 export const SessionProvider = ({ children }) => {
-    const [inicioPartida, setinicioPartida] = useState(false)
-    const [eliminarTirada, seteliminarTirada] = useState(false)
 
-    const [dadosGuardados, setDadosGuardados] = useState(dadosSeleccionados)
-    const [dadosValor, setDadosValor] = useState([])
-
+    const [inicioPartida, setInicioPartida] = useState(false)
+    const [finTurno, setFinTurno] = useState(true)
+    const [finPartida, setFinPartida] = useState(false)
+    const [dados, setDados] = useState([])
+    const [puntaje, setpuntaje] = useState(puntajeDefault)
+    const [eliminarJugada, setEliminarJugada] = useState(false)
     const [oportunidades, setOportunidades] = useState(1)
-    const [tiradas, settiradas] = useState(nombreTiradas)
-    
-    const [tiradasEspeciales, settiradasEspeciales] = useState({ escalera: false, poker: false, full: false, generala: false })
-    const [finalizoJuego, setfinalizoJuego] = useState(false)
 
     const state = {
-        dadosGuardados,
-        tiradas,
-        dadosValor,
-        eliminarTirada,
-        oportunidades,
         inicioPartida,
-        tiradasEspeciales,
-        finalizoJuego
+        finTurno,
+        finPartida,
+        dados,
+        puntaje,
+        eliminarJugada,
+        oportunidades
     }
 
     const actions = {
-        setDadosGuardados,
-        settiradas,
-        setDadosValor,
-        seteliminarTirada,
-        setOportunidades,
-        setinicioPartida,
-        settiradasEspeciales,
-        setfinalizoJuego
+        setInicioPartida,
+        setFinTurno,
+        setFinPartida,
+        setDados,
+        setpuntaje,
+        setEliminarJugada,
+        setOportunidades
     }
-    
+
     return <SessionContext.Provider value={{ state, actions }}> {children} </SessionContext.Provider>
 }
 
-export const useTiradas = () => {
+export const useJugadas = () => {
+
     const { state, actions } = useContext(SessionContext)
-    const { dadosGuardados, tiradas, eliminarTirada, oportunidades, inicioPartida, dadosValor, tiradasEspeciales } = state
-    const { settiradas, seteliminarTirada, setOportunidades, setinicioPartida, setDadosValor, settiradasEspeciales } = actions
 
+    const {
+        dados, puntaje, eliminarJugada
+    } = state
 
-    const reinicio = () => {
-        setinicioPartida(false)
-        setDadosValor([])
-        setOportunidades(1)
-    }
-
-    const tiradaValues = () => {
-        let dices = []
-        for (let i = 0; i < 5; i++) {
-            let number = Math.floor(Math.random() * 6) + 1
-            dices.push(number)
-        }
-        setDadosValor(dices);
-    }
-
+    const {
+        setFinTurno, setFinPartida, setpuntaje, setEliminarJugada, setDados
+    } = actions
 
     const handleSolo = (num) => {
-        let newTirada = tiradas
-        let n = num - 1
-        let cant = cantidadDeRepetidos(num)
-        let valor = cant * num
-        newTirada[n].value = valor
-        newTirada[n].played = true
-        settiradas(newTirada)
-        reinicio()
+        return num * cantRepetidos(num)
+    }
+
+    const cantRepetidos = (num) => {
+        return dados.filter(d => d == num).length
     }
 
     const esEscalera = () => {
@@ -112,83 +92,146 @@ export const useTiradas = () => {
     }
 
     const esGenerala = () => {
-        return existeEsaCAntRepetidos(5)
+        return existeEsaCantRepetidos(5)
     }
 
     const esPoker = () => {
-        return existeEsaCAntRepetidos(4) && existeEsaCAntRepetidos(1)
+        return existeEsaCantRepetidos(4) && existeEsaCantRepetidos(1)
     }
 
     const esFull = () => {
-        return existeEsaCAntRepetidos(3) && existeEsaCAntRepetidos(2)
+        return existeEsaCantRepetidos(3) && existeEsaCantRepetidos(2)
     }
 
-    const existeEsaCAntRepetidos = (num) => {
+    const existeEsaCantRepetidos = (num) => {
         let valor = false
-        dadosValor.forEach(function (i) { valor = valor || cantidadDeRepetidos(i) == num });
+        dados.forEach(function (i) { valor = (valor || cantRepetidos(i) == num) });
         return valor
     }
 
-    const hayTiradasParaSacrificar = () => {
-        let bool = true
-        tiradas.forEach(function(elemento) {
-            bool = bool && elemento.played
-        })
-        return !bool
+    const usarTirada = (index, num) => {
+        let puntajeNew = puntaje
+        puntajeNew[index].valor = num
+        puntajeNew[index].played= true
+        setpuntaje(puntajeNew)
+        setFinTurno(true)
+        setFinPartida(terminoElJuego() )
     }
 
-    const endGame = () => {
-       return !hayTiradasParaSacrificar()
-    }
- 
-    const cantidadDeRepetidos = (specificNumber) => {
-        return dadosValor.filter(n => n == specificNumber).length
-    }
-
-    const noseComoLlamarlo = () => {
-        let myArray = dadosValor;
-        let sinRepetidosDadosvalor = [...new Set(myArray)];
-        let otroArray = sinRepetidosDadosvalor.filter(n => tiradas[n - 1].value == 0)
-        return otroArray
-    }
-
-    const handleTiradasEspeciales = (index, puntaje) => {
-        let newTirada = tiradas
-        newTirada[index].value = puntaje
-        newTirada[index].played = true
-        settiradas(newTirada)
-        reinicio()
-    }
-
-    const handleDices = (event) => {
-        event.preventDefault()
-        setinicioPartida(!inicioPartida)
-        if (inicioPartida) {
-            tiradaValues()
+    const saberPuntaje = (nombre) => {
+        switch (nombre) {
+            case "Solo 1":
+                return handleSolo(1)
+            case "Solo 2":
+                return handleSolo(2)
+            case "Solo 3":
+                return handleSolo(3)
+            case "Solo 4":
+                return handleSolo(4)
+            case "Solo 5":
+                return handleSolo(5)
+            case "Solo 6":
+                return handleSolo(6)
+            case "Escalera" :
+                return esEscalera() ? 40 : 0
+            case "Poker" :
+                return esPoker() ? 40 : 0
+            case "Full" :
+                return esFull()  ? 40 : 0
+            case "Generala" :
+                return esGenerala()  ? 40 : 0
+            default:
+                return 0;
         }
     }
 
-    const handleDadosEstaticos = () => {
-        if (oportunidades < 3) {
-            setOportunidades(oportunidades + 1)
-            let dn = dadosValor
-            for (let i = 0; i < 5; i++) {
-                if (dadosGuardados[i] == 0) {
+    const yaFueJugado = (element) => element.played;
+
+    const terminoElJuego = () => {
+        return puntaje.every(yaFueJugado);
+    }
+
+    const totalPuntaje = () => {
+        return 10
+    }
+
+    const jugadaEliminada = (index) => {
+        let puntajeNew = puntaje
+        puntajeNew[index].played= true
+        setpuntaje(puntajeNew)
+        setFinTurno(true)
+        setEliminarJugada(false)
+        setFinPartida(terminoElJuego() )
+    }
+
+    const existeAlgunaJugada = (hayJugada) => {
+       setEliminarJugada( (eliminarJugada || hayJugada))   
+    }
+
+    const initGame = () => {
+        setDados([])
+        setpuntaje(initPuntaje(puntaje))
+        setFinPartida(false)
+    }
+    
+    const initPuntaje = () => {
+        let p = puntaje
+        p.forEach(function (i) {  i.played=false; i.valor= 0 })
+        return p;
+    }
+    
+
+    return { usarTirada, saberPuntaje, totalPuntaje, jugadaEliminada, existeAlgunaJugada, initGame }
+}
+
+export const useDices = () => {
+
+    const { state, actions } = useContext(SessionContext)
+    const { dados, oportunidades } = state
+    const { setDados, setFinTurno, setOportunidades, setEliminarJugada } = actions
+
+    //Agrega cero o el numero original en el index de la lista de dados
+    const changeValueIndexDice = (index, num = 0) => {
+        let dadosV = dados 
+        dadosV[index] = num
+        setDados(dadosV)
+    }
+
+    //Agrega 6 numeros random en una lista de dados
+    const tirarDados = () => {
+        let dices = []
+        for (let i = 0; i < 5; i++) {
+            let number = Math.floor(Math.random() * 6) + 1
+            dices.push(number)
+        }
+        setDados(dices);
+        setFinTurno(false) 
+        setOportunidades(1)       
+    }
+
+    //Agrega un numero random reemplazando el cero una lista de dados
+    const tirarDadosSeleccionados = () => {
+            let dados2 = dados
+            console.log("dados1")
+            console.log(dados2)
+
+            dados2.map(function (i, index) {
+                if (i == 0) {
+                    console.log()
                     let number = Math.floor(Math.random() * 6) + 1
-                    dn[i] = number
+                    dados2[index] = number
                 }
+            })
+            console.log("dados2")
+            console.log(dados2)
+            setDados(dados2)
+            setOportunidades( oportunidades + 1 )
+            if(oportunidades == 3){
+                setEliminarJugada(true)
+                setOportunidades(1)
             }
-            setDadosValor(dn)
-        }else{
-            let nn = hayTiradasParaSacrificar()
-            seteliminarTirada(nn)
         }
-    }
+    
+    return { tirarDados, tirarDadosSeleccionados, changeValueIndexDice }
 
-    const changeValueDados = () => {
-        cantidadDeRepetidos()
-        settiradasEspeciales({ escalera: esEscalera(), poker: esPoker(), full: esFull(), generala: esGenerala() })
-    }
-
-    return {changeValueDados, endGame ,tiradaValues,reinicio,  handleDadosEstaticos, handleSolo, handleTiradasEspeciales, handleDices, noseComoLlamarlo }
 }

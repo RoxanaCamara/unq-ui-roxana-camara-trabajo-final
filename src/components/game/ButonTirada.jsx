@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from '@material-ui/core/Button';
+import { SessionContext, useJugadas } from '../helper/Session';
 
-export const ButonTirada = ({ nombre, metodo, index  }) => {
-    return (
-        <>
-        {
-          !tiradas[index].played && <Button variant="contained" color="primary" onClick={ e => { metodo()  }} >{nombre}</Button>
-        }
-        </>
-    )
+export const ButonTirada = ({ yaSeJugo, nombreTirada, index }) => {
+
+  const { usarTirada, saberPuntaje, existeAlgunaJugada } = useJugadas()
+  let puntaje = saberPuntaje(nombreTirada)
+  let esUnaJugadaPosible = !yaSeJugo && puntaje > 0
+  existeAlgunaJugada(esUnaJugadaPosible)
+
+  return (
+    <>
+      {
+       esUnaJugadaPosible && 
+        <Button variant="contained" color="primary" onClick={ e => usarTirada(index, puntaje) } >{nombreTirada}</Button>
+      }
+    </>
+  )
 }

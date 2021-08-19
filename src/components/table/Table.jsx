@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { SessionContext } from '../helper/Session';
+import { SessionContext, useJugadas } from '../helper/Session';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TiradaCheck from './TiradaCheck';
@@ -30,7 +30,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles  = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   table: {
     maxWidth: 400,
   }
@@ -38,9 +38,10 @@ const useStyles  = makeStyles((theme) => ({
 
 const TableGame = () => {
   const { state } = useContext(SessionContext)
-  const {  tiradas , eliminarTirada} = state
+  const { puntaje, eliminarJugada } = state
+  const { totalPuntaje } = useJugadas()
   const classes = useStyles();
-  
+
   return (
     <TableContainer  >
       <Table className={classes.table} aria-label="customized table">
@@ -48,44 +49,44 @@ const TableGame = () => {
           <TableRow>
             <StyledTableCell>Jugada</StyledTableCell>
             <StyledTableCell align="right">Puntaje</StyledTableCell>
-           { eliminarTirada && <StyledTableCell align="right">Eliminar</StyledTableCell>}
+            {eliminarJugada && <StyledTableCell align="right">Eliminar</StyledTableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
-          {tiradas.map((row, index) => (
+          {puntaje.map((row, index) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name} 
+                {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {row.value}  
+                {row.valor}
               </StyledTableCell>
-             { 
-             eliminarTirada  &&
-             <>
-             {   
-               !row.played ?
-              <StyledTableCell align="right">
-             <TiradaCheck tirada={row} index={index} />
-               </StyledTableCell>
-               :
-               <StyledTableCell align="right">
-               <FontAwesomeIcon icon={faBan} size="lg" />
-                 </StyledTableCell> }
-            </>
-            }
+              {
+                eliminarJugada &&
+                <>
+                  {
+                    !row.played ?
+                      <StyledTableCell align="right">
+                        <TiradaCheck tirada={row} index={index} />
+                      </StyledTableCell>
+                      :
+                      <StyledTableCell align="right">
+                        <FontAwesomeIcon icon={faBan} size="lg" />
+                      </StyledTableCell>}
+                </>
+              }
             </StyledTableRow>
-          ))}          
+          ))}
           <StyledTableRow>
-              <StyledTableCell component="th">
+            <StyledTableCell component="th">
               <Box fontWeight="fontWeightBold" fontSize={15}>
-              Total 
+                Total
               </Box>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                0  
-              </StyledTableCell>
-            </StyledTableRow>
+            </StyledTableCell>
+            <StyledTableCell align="right">
+              {totalPuntaje()}
+            </StyledTableCell>
+          </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>
