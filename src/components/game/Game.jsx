@@ -83,4 +83,6 @@ const Game = () => {
     )
 }
 
+////const rows = [{ name: '', descriotion: '', example: { dices: [1,2,4,5,6], value: 12} } ,{ name: '', descriotion: '', example: { dices: [1,2,4,5,6], value: 12} }];
+
 export default Game;

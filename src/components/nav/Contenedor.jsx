@@ -12,15 +12,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  toolbar: {
-    minHeight: 109,
-    alignItems: 'flex-start',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
-    alignSelf: 'flex-end',
   },
 }));
 
@@ -28,30 +24,25 @@ export const Contenedor = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const handleRules = (event) => {
-    history.push("/reglas");
-  };
-
-  const handleGenerala = (event) => {
-    history.push("/Game");
+  const handleRedirect = (text) => {
+    history.push(text);
   };
 
   return (
     <div>
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar className={classes.toolbar}>
-            <Typography className={classes.title} variant="h4" noWrap onClick={handleGenerala}>
-              Generala
-              <FontAwesomeIcon icon={faDice} size="lg" />
-            </Typography>
-            <Typography className={classes.title} variant="h5" noWrap onClick={handleRules}>
-              Reglas
-              <FontAwesomeIcon icon={faPencilRuler} size="lg" />
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
+       <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect("./game")}>
+          <FontAwesomeIcon icon={faDice} size="lg" />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Generala
+          </Typography>
+          <Button color="inherit" onClick={() => handleRedirect("./rules")}>Reglas</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
       <Container fixed>
         <main>
           {children}
