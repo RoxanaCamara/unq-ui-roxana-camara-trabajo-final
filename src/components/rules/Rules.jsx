@@ -23,6 +23,7 @@ const Rules = () => {
 
   return (
     
+    <Contenedor>
     <div className={classes.root}>
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="sm">
@@ -36,6 +37,7 @@ const Rules = () => {
         }               
       </Container>
     </div>
+    </Contenedor>
   );
 
 }

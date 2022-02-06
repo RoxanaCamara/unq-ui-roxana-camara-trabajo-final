@@ -7,20 +7,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { SessionContext, useDices, useJugadas, usePartida } from '../helper/Session';
 import Typography from '@material-ui/core/Typography';
 import EndGameModal from './EndGame';
-import { ButonTirada } from './ButonTirada';
-import Dice from '../dice/Dice';
+import { Dices } from '../dice/Dices';
+import { Oportunity } from './Oportunity';
+import { Jugadas } from './Jugadas';
+import { useStyles } from './style';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    espaciado: {
-        margin: theme.spacing(3, 3, 2, 4),
-    },
-}));
 
 const Game = () => {
-
     const classes = useStyles();
     const { state, actions } = useContext(SessionContext)
     const { dados, finTurno, puntaje, oportunidades, eliminarJugada } = state
@@ -38,40 +31,25 @@ const Game = () => {
                         {
                             finTurno ?
                                 <Grid item xs={4} md={4}>
-                                    <Button variant="contained" className={classes.espaciado} onClick={e => tirarDados()}>Tirar Dados</Button>
+                                    <Button variant="contained" 
+                                    className={classes.espaciado} onClick={e => tirarDados()}>
+                                        Tirar Dados
+                                    </Button>
                                 </Grid>
                                 :
                                 <>
                                     <Grid item xs={4} md={4}>
-                                        <Typography variant="h3" component="h3">Dados</Typography>
-                                        <Grid container item xs={12} spacing={3}>
-                                            {
-                                                dados.map((i, index) => (
-                                                    <Dice num={i}
-                                                        index={index}
-                                                        key={index}
-                                                    />
-                                                ))
-                                            }
-                                        </Grid>
-                                        <Typography variant="subtitle2" gutterBottom>* Elija los dados que no quiere volver a tirar</Typography>
+                                        <Dices dados={dados} />
                                     </Grid>
-
                                     <Grid item xs={4} md={4}>
-                                        <Typography variant="h3" component="h3">Jugadas disponibles</Typography>
-                                        {
-                                            puntaje.map((elem, index) =>
-                                                <ButonTirada yaSeJugo={elem.played} nombreTirada={elem.name} index={index}
-                                                />
-                                            )
-                                        }
-                                        {
-                                            oportunidades <= 3 && !eliminarJugada &&
-                                            <>
-                                                <Button variant="contained" className={classes.root} onClick={ e => tirarDadosSeleccionados()}>Otro intento</Button>
-                                                <Typography variant="h5" component="h6">* Oportunidad {oportunidades} de 3</Typography>
-                                            </>
-                                        }
+                                        <Typography variant="h3" component="h3">
+                                            Jugadas disponibles
+                                        </Typography>
+                                        <Jugadas jugadasDisponibles={puntaje} />
+                                        <Oportunity 
+                                            oportunidades={oportunidades} 
+                                            eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
+                                        />
                                     </Grid>
                                 </>
                         }
@@ -82,7 +60,5 @@ const Game = () => {
         </Contenedor>
     )
 }
-
-////const rows = [{ name: '', descriotion: '', example: { dices: [1,2,4,5,6], value: 12} } ,{ name: '', descriotion: '', example: { dices: [1,2,4,5,6], value: 12} }];
 
 export default Game;
