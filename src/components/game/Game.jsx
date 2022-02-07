@@ -30,29 +30,23 @@ const Game = () => {
                         <Grid item >
                             <TableGame />
                         </Grid>
-                        <Grid item>
+                        <Grid item  
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start">
                         {
-                            finTurno ?
-                            
+                            finTurno ?                            
                                 <Button variant="contained"
                                     className={classes.espaciado} onClick={e => tirarDados()}>
                                     Tirar Dados
-                                </Button>
-                           
+                                </Button>                           
                                 :
                                 <>
-                           
-                                <Dices dados={dados} />
-                            
-                                <Typography variant="h3" component="h3">
-                                    Jugadas disponibles
-                                </Typography>
-                                
                                 <Oportunity
                                     oportunidades={oportunidades}
                                     eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
-                                />
-
+                                />                           
+                                <Dices dados={dados} />                                                                
                                 <Jugadas jugadasDisponibles={puntaje} />                           
                         </>
                         }  
