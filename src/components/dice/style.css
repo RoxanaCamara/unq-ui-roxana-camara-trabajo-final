@@ -58,8 +58,8 @@
     margin: 16px;
     padding: 4px;
     background-color: #e7e7e7;
-    width: 104px;
-    height: 104px;
+    width: 74px;
+    height: 74px;
     object-fit: contain;
     box-shadow: inset 0 5px white, inset 0 -5px #bbb, inset 5px 0 #d7d7d7, inset -5px 0 #d7d7d7;
     border-radius: 10%;
@@ -67,10 +67,18 @@
 
 .pip {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     margin: 4px;
     background-color: #333;
     box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+
+.table_dices{
+    border-radius: 26px 28px 28px 28px;
+    -moz-border-radius: 26px 28px 28px 28px;
+    -webkit-border-radius: 26px 28px 28px 28px;
+    border: 20px solid #ba5609;
+    background-color: #0b5c11;
 }

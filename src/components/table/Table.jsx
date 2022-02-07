@@ -11,14 +11,20 @@ import { faBan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TiradaCheck from './TiradaCheck';
 import { Box } from '@material-ui/core';
+import '../table/style.css'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    padding: '10px',
+    textAlign: 'center'
   },
   body: {
+    textAlign: 'center',
     fontSize: 14,
+    padding: '5px'
   },
 }))(TableCell);
 
@@ -32,7 +38,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    maxWidth: 400,
+    width: '110px',
+    margin: '0px'    
   }
 }))
 
@@ -43,13 +50,13 @@ const TableGame = () => {
   const classes = useStyles();
 
   return (
-    <TableContainer  >
-      <Table className={classes.table} aria-label="customized table">
+    <TableContainer className='book'>
+      <Table aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Jugada</StyledTableCell>
-            <StyledTableCell align="right">Puntaje</StyledTableCell>
-            {eliminarJugada && <StyledTableCell align="right">Eliminar</StyledTableCell>}
+            <StyledTableCell align="center">Puntaje</StyledTableCell>
+            {eliminarJugada && <StyledTableCell align="center">Eliminar</StyledTableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -58,7 +65,7 @@ const TableGame = () => {
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="center">
                 {row.valor}
               </StyledTableCell>
               {
@@ -66,11 +73,11 @@ const TableGame = () => {
                 <>
                   {
                     !row.played ?
-                      <StyledTableCell align="right">
+                      <StyledTableCell align="center">
                         <TiradaCheck tirada={row} index={index} />
                       </StyledTableCell>
                       :
-                      <StyledTableCell align="right">
+                      <StyledTableCell align="center">
                         <FontAwesomeIcon icon={faBan} size="lg" />
                       </StyledTableCell>}
                 </>
@@ -83,7 +90,7 @@ const TableGame = () => {
                 Total
               </Box>
             </StyledTableCell>
-            <StyledTableCell align="right">
+            <StyledTableCell align="center">
               {totalPuntaje()}
             </StyledTableCell>
           </StyledTableRow>

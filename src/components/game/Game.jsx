@@ -22,38 +22,41 @@ const Game = () => {
     return (
         <Contenedor>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={1}>
-                    <>
-                        <Grid item xs={6} md={4} >
-                            <Typography variant="h3" component="h3">Tabla</Typography>
+                <Grid container
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center">
+                    
+                        <Grid item >
                             <TableGame />
                         </Grid>
+                        <Grid item>
                         {
                             finTurno ?
-                                <Grid item xs={4} md={4}>
-                                    <Button variant="contained" 
+                            
+                                <Button variant="contained"
                                     className={classes.espaciado} onClick={e => tirarDados()}>
-                                        Tirar Dados
-                                    </Button>
-                                </Grid>
+                                    Tirar Dados
+                                </Button>
+                           
                                 :
                                 <>
-                                    <Grid item xs={4} md={4}>
-                                        <Dices dados={dados} />
-                                    </Grid>
-                                    <Grid item xs={4} md={4}>
-                                        <Typography variant="h3" component="h3">
-                                            Jugadas disponibles
-                                        </Typography>
-                                        <Jugadas jugadasDisponibles={puntaje} />
-                                        <Oportunity 
-                                            oportunidades={oportunidades} 
-                                            eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
-                                        />
-                                    </Grid>
-                                </>
-                        }
-                    </>
+                           
+                                <Dices dados={dados} />
+                            
+                                <Typography variant="h3" component="h3">
+                                    Jugadas disponibles
+                                </Typography>
+                                
+                                <Oportunity
+                                    oportunidades={oportunidades}
+                                    eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
+                                />
+
+                                <Jugadas jugadasDisponibles={puntaje} />                           
+                        </>
+                        }  
+                         </Grid>                  
                     <EndGameModal />
                 </Grid>
             </Box>

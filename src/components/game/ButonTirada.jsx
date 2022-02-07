@@ -13,7 +13,7 @@ export const ButonTirada = ({ yaSeJugo, nombreTirada, index }) => {
     <>
       {
        esUnaJugadaPosible && 
-        <Button variant="contained" color="primary" onClick={ e => usarTirada(index, puntaje) } >{nombreTirada}</Button>
+        <Button variant="contained" color="primary" onClick={ () => usarTirada(index, puntaje) } >{nombreTirada}</Button>
       }
     </>
   )
