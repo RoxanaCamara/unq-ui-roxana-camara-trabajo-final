@@ -40,7 +40,7 @@ const Dice = ({ num, index }) => {
     return (
         <>
             <div className="nono">
-                <Grid item xs={4}>
+               
                     {
                         num == 1 &&
                         <div className="first-face">
@@ -109,7 +109,7 @@ const Dice = ({ num, index }) => {
                     <Tooltip title="* Destilde el dado si quiere volver a tirarlo">                      
                             <Checkbox checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />                       
                     </Tooltip>
-            </Grid>
+           
         </div>
         </>
     )

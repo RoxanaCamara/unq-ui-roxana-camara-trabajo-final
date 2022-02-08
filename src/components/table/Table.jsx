@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { SessionContext, useJugadas } from '../helper/Session';
-import { faBan } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TiradaCheck from './TiradaCheck';
 import { Box } from '@material-ui/core';
@@ -39,7 +39,7 @@ const StyledTableRow = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   table: {
     width: '110px',
-    margin: '0px'    
+    margin: '0px'
   }
 }))
 
@@ -56,7 +56,7 @@ const TableGame = () => {
           <TableRow>
             <StyledTableCell>Jugada</StyledTableCell>
             <StyledTableCell align="center">Puntaje</StyledTableCell>
-            {eliminarJugada && <StyledTableCell align="center">Eliminar</StyledTableCell>}
+            <StyledTableCell align="center">Anular</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -68,23 +68,22 @@ const TableGame = () => {
               <StyledTableCell align="center">
                 {row.valor}
               </StyledTableCell>
-              {
-                eliminarJugada &&
-                <>
-                  {
-                    !row.played ?
-                      <StyledTableCell align="center">
-                        <TiradaCheck tirada={row} index={index} />
-                      </StyledTableCell>
+              <StyledTableCell align="center">
+                {   
+                eliminarJugada ?
+                <TiradaCheck tirada={row} index={index} />                
+                :                  
+                    row.played ?
+                    <FontAwesomeIcon icon={faBan} size="lg" />                     
                       :
-                      <StyledTableCell align="center">
-                        <FontAwesomeIcon icon={faBan} size="lg" />
-                      </StyledTableCell>}
-                </>
-              }
+                      <FontAwesomeIcon icon={faQuestion} size="lg" />
+
+                }
+              </StyledTableCell>
             </StyledTableRow>
           ))}
-          <StyledTableRow>
+          <StyledTableRow >
+
             <StyledTableCell component="th">
               <Box fontWeight="fontWeightBold" fontSize={15}>
                 Total
@@ -94,6 +93,7 @@ const TableGame = () => {
               {totalPuntaje()}
             </StyledTableCell>
           </StyledTableRow>
+
         </TableBody>
       </Table>
     </TableContainer>

@@ -26,31 +26,34 @@ const Game = () => {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center">
-                    
-                        <Grid item >
-                            <TableGame />
-                        </Grid>
-                        <Grid item  
-                            direction="column"
-                            justifyContent="center"
-                            alignItems="flex-start">
+
+                    <Grid item >
+                        <TableGame />
+                    </Grid>
+                    <Grid item
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="flex-start">
                         {
-                            finTurno ?                            
-                                <Button variant="contained"
-                                    className={classes.espaciado} onClick={e => tirarDados()}>
+                            finTurno ?
+                                <button role="button" className="button-39"
+                                    onClick={() => tirarDados()}>
                                     Tirar Dados
-                                </Button>                           
+                                </button>
+
                                 :
-                                <>
-                                <Oportunity
-                                    oportunidades={oportunidades}
-                                    eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
-                                />                           
-                                <Dices dados={dados} />                                                                
-                                <Jugadas jugadasDisponibles={puntaje} />                           
-                        </>
-                        }  
-                         </Grid>                  
+                                
+                                    <Oportunity
+                                        oportunidades={oportunidades}
+                                        eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
+                                    />
+                        }
+
+                            <Dices dados={dados} finTurno={finTurno} />
+                        {
+                            !finTurno &&  <Jugadas jugadasDisponibles={puntaje} />
+                        }
+                    </Grid>
                     <EndGameModal />
                 </Grid>
             </Box>

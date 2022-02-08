@@ -6,19 +6,17 @@ import '../dice/style.css'
 
 
 export const Dices = (props) => {
-    const { dados } = props
-    return <div> 
+    const { dados, finTurno } = props
               
-        <Grid container item xs={12} spacing={3} className="table_dices">
+    return <div className="table_dices">
             {
+                !finTurno &&
                 dados.map((i, index) => (
                     <Dice num={i}
                         index={index}
                         key={index}
                     />
                 ))
-            }
-        </Grid>
-        
+            }      
     </div>;
 };

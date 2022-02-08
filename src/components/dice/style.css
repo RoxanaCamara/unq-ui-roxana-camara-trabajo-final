@@ -4,6 +4,7 @@
     align-items: center;
 }
 
+
 .second-face {
     display: flex;
     justify-content: space-between;
@@ -76,6 +77,15 @@
 }
 
 .table_dices{
+    width: 356px;
+    height: 262px;
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
     border-radius: 26px 28px 28px 28px;
     -moz-border-radius: 26px 28px 28px 28px;
     -webkit-border-radius: 26px 28px 28px 28px;
