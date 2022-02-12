@@ -1,16 +1,13 @@
-import { Contenedor } from './components/nav/Contenedor';
-import { makeStyles } from '@material-ui/core/styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDice, faPencilRuler } from '@fortawesome/free-solid-svg-icons'
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import { useHistory } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import GeneralaRoutes from './routes/Routes';
 
 const App = () => {
   
   return (
     <>
-      <Typography variant="h4" noWrap>
-          Generala <FontAwesomeIcon icon={faDice} size="lg" />
-      </Typography>
+      <GeneralaRoutes />
     </>
   );
 }

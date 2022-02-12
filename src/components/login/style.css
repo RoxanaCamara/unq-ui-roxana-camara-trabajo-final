@@ -1,9 +1,25 @@
 
 
 .body{
-    background-color: blue;
-    background-size: cover;
-    height: 100vh;  
-    padding:0;
-    margin:0;
+    height: 100vh;
+    display: flex;
+}
+
+.video{
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+video{
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+}
+
+video::-webkit-media-controls {
+    display: none;
 }
