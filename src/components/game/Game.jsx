@@ -1,62 +1,27 @@
-import React, { useContext } from 'react';
-import Button from '@material-ui/core/Button';
-import TableGame from '../table/Table';
-import { Contenedor } from '../nav/Contenedor';
-import { Box, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { SessionContext, useDices, useJugadas, usePartida } from '../helper/Session';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import { Grid } from '@material-ui/core';
 import EndGameModal from './EndGame';
-import { Dices } from '../dice/Dices';
-import { Oportunity } from './Oportunity';
-import { Jugadas } from './Jugadas';
-import { useStyles } from './style';
+import TableScore from '../table/Table';
+import { Contenedor } from '../nav/Contenedor';
+import { TableDices } from './TableDices';
+import './style.css'
 
 
 const Game = () => {
-    const classes = useStyles();
-    const { state, actions } = useContext(SessionContext)
-    const { dados, finTurno, puntaje, oportunidades, eliminarJugada } = state
-    const { tirarDados, tirarDadosSeleccionados } = useDices()
 
     return (
         <Contenedor>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center">
-
-                    <Grid item >
-                        <TableGame />
+                <Grid container xs={12} direction="row">
+                    <Grid item  sm={5}>
+                        <TableScore />
                     </Grid>
-                    <Grid item
-                        direction="column"
-                        justifyContent="center"
-                        alignItems="flex-start">
-                        {
-                            finTurno ?
-                                <button role="button" className="button-39"
-                                    onClick={() => tirarDados()}>
-                                    Tirar Dados
-                                </button>
 
-                                :
-                                
-                                    <Oportunity
-                                        oportunidades={oportunidades}
-                                        eliminarJugada={eliminarJugada} tirarDadosSeleccionados={tirarDadosSeleccionados}
-                                    />
-                        }
-
-                            <Dices dados={dados} finTurno={finTurno} />
-                        {
-                            !finTurno &&  <Jugadas jugadasDisponibles={puntaje} />
-                        }
-                    </Grid>
+                    <Grid item sm={7}>
+                        <TableDices/>
+                    </Grid> 
+                                          
                     <EndGameModal />
                 </Grid>
-            </Box>
         </Contenedor>
     )
 }

@@ -51,6 +51,9 @@
   color: rgba(0, 0, 0, .3);
 }
 
+button{
+  margin: 1rem 0.5rem;
+}
 
 /* CSS */
 .button-39 {
@@ -86,3 +89,5 @@
 .button-39:focus-visible {
   box-shadow: none;
 }
+
+/**/

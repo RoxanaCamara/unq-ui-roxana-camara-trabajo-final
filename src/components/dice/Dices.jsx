@@ -1,8 +1,6 @@
 import React from 'react';
 import Dice from './Dice';
-import { Box, Grid } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import '../dice/style.css'
+import './style.css'
 
 
 export const Dices = (props) => {

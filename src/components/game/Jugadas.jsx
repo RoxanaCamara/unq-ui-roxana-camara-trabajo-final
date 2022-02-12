@@ -1,7 +1,7 @@
-import { Button, Grid } from '@material-ui/core';
 import React from 'react';
-import '../game/style.css'
+import { Grid } from '@material-ui/core';
 import { useJugadas } from '../helper/Session';
+import './style.css'
 
 
 export const Jugadas = (props) => {
@@ -20,7 +20,7 @@ export const Jugadas = (props) => {
                 jugadasDisponibles.map((elem, index) => {
                     if (saberPuntaje(elem.name) > 0) {
                         if (!elem.played) {
-                            return <Grid style={{ padding: 20 }} item>
+                            return <Grid item>
                                 <button className="button-18"  variant="contained" color="primary" onClick={() => usarTirada(index, saberPuntaje(elem.name))} >{elem.name}</button>
                             </Grid>
 

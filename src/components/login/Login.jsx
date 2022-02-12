@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
-import "../login/style.css";
 import dices from "./dice.mp4";
+import "../login/style.css";
 
 const useStyles = makeStyles({
   root: {

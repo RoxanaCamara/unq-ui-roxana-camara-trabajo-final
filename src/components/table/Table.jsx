@@ -1,16 +1,10 @@
 import React, { useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { SessionContext, useJugadas } from '../helper/Session';
-import { faBan, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBan, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { SessionContext, useJugadas } from '../helper/Session';
 import TiradaCheck from './TiradaCheck';
-import { Box } from '@material-ui/core';
 import '../table/style.css'
 
 const StyledTableCell = withStyles((theme) => ({
@@ -45,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const TableGame = () => {
+const TableScore = () => {
+
   const { state } = useContext(SessionContext)
   const { puntaje, eliminarJugada } = state
   const { totalPuntaje } = useJugadas()
@@ -103,4 +98,4 @@ const TableGame = () => {
     </div>
   );
 }
-export default TableGame;
+export default TableScore;
