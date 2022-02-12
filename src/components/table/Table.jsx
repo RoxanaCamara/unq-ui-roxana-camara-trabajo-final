@@ -13,18 +13,19 @@ import TiradaCheck from './TiradaCheck';
 import { Box } from '@material-ui/core';
 import '../table/style.css'
 
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    padding: '10px',
-    textAlign: 'center'
+    padding: '1rem',
+    textAlign: 'center',
+    margin: '0px'
   },
   body: {
     textAlign: 'center',
     fontSize: 14,
-    padding: '5px'
+    padding: '0.5rem',
+    margin: '0px'
   },
 }))(TableCell);
 
@@ -38,10 +39,11 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    width: '110px',
-    margin: '0px'
+    width: '18rem',  
+    paddingBottom: '3px'
   }
 }))
+
 
 const TableGame = () => {
   const { state } = useContext(SessionContext)
@@ -50,8 +52,9 @@ const TableGame = () => {
   const classes = useStyles();
 
   return (
+    <div className={classes.table}>
     <TableContainer className='book'>
-      <Table aria-label="customized table">
+      <Table aria-label="customized table" >
         <TableHead>
           <TableRow>
             <StyledTableCell>Jugada</StyledTableCell>
@@ -97,6 +100,7 @@ const TableGame = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 }
 export default TableGame;
