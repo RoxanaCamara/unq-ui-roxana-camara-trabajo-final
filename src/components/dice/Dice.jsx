@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tooltip, Checkbox } from "@material-ui/core";
-import { useDices } from "../helper/Session";
+import { useDices } from "../helper/useDices";
 import "./style.css";
 
 const Dice = ({ num, index }) => {

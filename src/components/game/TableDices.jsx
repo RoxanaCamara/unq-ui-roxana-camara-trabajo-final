@@ -4,7 +4,8 @@ import { Grid } from "@material-ui/core";
 import { Dices } from "../dice/Dices";
 import { Oportunity } from "./Oportunity";
 import { Jugadas } from "./Jugadas";
-import { SessionContext, useDices } from "../helper/Session";
+import { useDices } from "../helper/useDices";
+import { SessionContext } from "../helper/Session";
 import './style.css'
 
 

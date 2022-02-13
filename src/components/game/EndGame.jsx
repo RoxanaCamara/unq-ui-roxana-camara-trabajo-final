@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,8 +9,8 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { SessionContext, useJugadas, usePartida, useTiradas } from '../helper/Session';
-import { useHistory } from 'react-router-dom';
+import { SessionContext } from '../helper/Session';
+import { useJugadas } from '../helper/useJugadas';
 
 const styles = (theme) => ({
   root: {

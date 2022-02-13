@@ -12,8 +12,9 @@ import {
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { SessionContext, useJugadas } from "../helper/Session";
+import { SessionContext } from "../helper/Session";
 import "../table/style.css";
+import { useJugadas } from "../helper/useJugadas";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { useJugadas } from '../helper/Session';
+import { useJugadas } from '../helper/useJugadas';
 import './style.css'
 
 
