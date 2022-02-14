@@ -3,9 +3,7 @@ import Dice from './Dice';
 import './style.css'
 
 
-export const Dices = (props) => {
-    const { dados, finTurno } = props
-              
+export const Dices = ( { dados, finTurno, changeValueIndexDice } ) => {              
     return <div className="table_dices">
             {
                 !finTurno &&
@@ -13,6 +11,7 @@ export const Dices = (props) => {
                     <Dice num={i}
                         index={index}
                         key={index}
+                        changeValueIndexDice={changeValueIndexDice}
                     />
                 ))
             }      

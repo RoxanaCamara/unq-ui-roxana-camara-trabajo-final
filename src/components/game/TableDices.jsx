@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
-
 import { Dices } from "../dice/Dices";
 import { Oportunity } from "./Oportunity";
 import { Jugadas } from "./Jugadas";
@@ -12,7 +11,7 @@ import './style.css'
 export const TableDices = () => {
   const { state } = useContext(SessionContext);
   const { dados, finTurno, puntaje, oportunidades, eliminarJugada } = state;
-  const { tirarDados, tirarDadosSeleccionados } = useDices();
+  const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice } = useDices();
 
   return (
     <Grid
@@ -40,7 +39,7 @@ export const TableDices = () => {
       </Grid>
 
       <Grid item>
-        <Dices dados={dados} finTurno={finTurno} />
+        <Dices dados={dados} finTurno={finTurno} changeValueIndexDice={changeValueIndexDice} />
       </Grid>
 
       <Grid item>{!finTurno && <Jugadas jugadasDisponibles={puntaje} />}</Grid>
