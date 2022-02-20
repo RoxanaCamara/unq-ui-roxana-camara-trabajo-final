@@ -29,18 +29,13 @@ export const useDices = () => {
     //Agrega un numero random reemplazando el cero una lista de dados
     const tirarDadosSeleccionados = () => {
             let dados2 = dados
-            console.log("dados1")
-            console.log(dados2)
 
             dados2.map(function (i, index) {
                 if (i == 0) {
-                    console.log()
                     let number = Math.floor(Math.random() * 6) + 1
                     dados2[index] = number
                 }
             })
-            console.log("dados2")
-            console.log(dados2)
             setDados(dados2)
             setOportunidades( oportunidades + 1 )
             if(oportunidades == 3){

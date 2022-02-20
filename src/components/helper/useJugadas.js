@@ -6,7 +6,7 @@ export const useJugadas = () => {
     /*played puede tener 3 valores 
         JUGADO
         ANULADO
-        '' QUE SERIA IGUA A VACIO
+        '' QUE SERIA IGUAL A VACIO
     */
 
     //revisar la logica y hacer los cambios respecto a la implementacion
@@ -101,7 +101,7 @@ export const useJugadas = () => {
         setFinPartida(terminoElJuego() )
     }
 
-    const yaFueJugado = (element) => element.played;
+    const yaFueJugado = (element) => element.played == 'ANULADO' || element.played == 'JUGADO';
 
     const terminoElJuego = () => {
         return puntaje.every(yaFueJugado);

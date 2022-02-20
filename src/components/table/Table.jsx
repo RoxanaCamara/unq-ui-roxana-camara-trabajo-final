@@ -31,12 +31,9 @@ const TableScore = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChange = (index, e) => {
-    e.preventDefault()
-    if (e.target.checked) {
-      jugadaEliminada(index)
-    }
-    setChecked(!checked)
-  }
+    e.preventDefault()    
+    jugadaEliminada(index)
+   }
 
   const segunTipoDeJugada = (status) => {
     switch (status) {
