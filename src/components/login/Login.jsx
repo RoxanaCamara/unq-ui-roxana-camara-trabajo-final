@@ -66,7 +66,7 @@ export const Login = () => {
           <button className="button-18" onClick={() => handleRedirect("/game")}>
             Solitario
           </button>
-          <button className="button-18" onClick={() => handleRedirect("/game")}>
+          <button className="button-18" onClick={() => handleRedirect("/multiplayer")}>
             Multijugador
           </button>
         </CardActions>
