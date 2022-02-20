@@ -1,45 +1,31 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { MuiDialogTitle, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { withStyles } from "@material-ui/core/styles";
+import { TableCell, TableRow } from '@material-ui/core';
 
-const styles = (theme) => ({
-    root: {
-      margin: 0,
-      padding: theme.spacing(2),
-    },
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: theme.palette.grey[500],
-    },
-  });
 
-export const DialogTitle = withStyles(styles)((props) => {
-    const { children, classes, onClose, ...other } = props;
-    return (
-      <MuiDialogTitle disableTypography className={classes.root} {...other}>
-        <Typography variant="h6">{children}</Typography>
-        {onClose ? (
-          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-    );
-  });
-  
-export const DialogContent = withStyles((theme) => ({
-    root: {
-      padding: theme.spacing(2),
+///
+
+export const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+    padding: "1rem",
+    textAlign: "center",
+    margin: "0px",
+  },
+  body: {
+    textAlign: "center",
+    fontSize: 14,
+    padding: "0px",
+    margin: "0px"
+  },
+}))(TableCell);
+
+export const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
     },
-  }))(MuiDialogContent);
-  
-export const DialogActions = withStyles((theme) => ({
-    root: {
-      margin: 0,
-      padding: theme.spacing(1),
-    },
-  }))(MuiDialogActions);
+  },
+}))(TableRow);
+

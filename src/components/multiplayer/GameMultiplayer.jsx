@@ -3,9 +3,8 @@ import { Chip, Grid } from '@material-ui/core'
 import { Contenedor } from '../nav/Contenedor'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'
-
 import TableScore from '../table/Table'
-import { TableDices } from '../game/TableDices'
+import TableDices from '../game/TableDices'
 
 const GameMultiplayer = () => {
     return (

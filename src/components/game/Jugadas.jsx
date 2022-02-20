@@ -19,7 +19,7 @@ export const Jugadas = (props) => {
             {
                 jugadasDisponibles.map((elem, index) => {
                     if (saberPuntaje(elem.name) > 0) {
-                        if (!elem.played) {
+                        if (elem.played == '') {
                             return <Grid item>
                                 <button className="button-18"  variant="contained" color="primary" onClick={() => usarTirada(index, saberPuntaje(elem.name))} >{elem.name}</button>
                             </Grid>

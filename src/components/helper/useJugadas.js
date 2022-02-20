@@ -3,6 +3,12 @@ import { SessionContext } from "./Session"
 
 export const useJugadas = () => {
 
+    /*played puede tener 3 valores 
+        JUGADO
+        ANULADO
+        '' QUE SERIA IGUA A VACIO
+    */
+
     //revisar la logica y hacer los cambios respecto a la implementacion
     const { state, actions } = useContext(SessionContext)
     const { dados, puntaje, eliminarJugada } = state
@@ -89,7 +95,7 @@ export const useJugadas = () => {
     const usarTirada = (index, num) => {
         let puntajeNew = puntaje
         puntajeNew[index].valor = num
-        puntajeNew[index].played= true
+        puntajeNew[index].played= 'JUGADO'
         setpuntaje(puntajeNew)
         setFinTurno(true)
         setFinPartida(terminoElJuego() )
@@ -107,7 +113,7 @@ export const useJugadas = () => {
 
     const jugadaEliminada = (index) => {
         let puntajeNew = puntaje
-        puntajeNew[index].played= true
+        puntajeNew[index].played= 'ANULADO'
         setpuntaje(puntajeNew)
         setFinTurno(true)
         setEliminarJugada(false)
@@ -126,7 +132,7 @@ export const useJugadas = () => {
     
     const initPuntaje = () => {
         let p = puntaje
-        p.forEach(function (i) {  i.played=false; i.valor= 0 })
+        p.forEach(function (i) {  i.played=''; i.valor= 0 })
         return p;
     }
     

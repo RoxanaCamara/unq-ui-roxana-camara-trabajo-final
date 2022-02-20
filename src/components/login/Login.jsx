@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Login = () => {
+const Login = () => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -63,7 +63,7 @@ export const Login = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <button className="button-18" onClick={() => handleRedirect("/game")}>
+          <button className="button-18" onClick={() => handleRedirect("/solitarie")}>
             Solitario
           </button>
           <button className="button-18" onClick={() => handleRedirect("/multiplayer")}>
@@ -75,3 +75,4 @@ export const Login = () => {
     </div>
   );
 };
+export default Login;

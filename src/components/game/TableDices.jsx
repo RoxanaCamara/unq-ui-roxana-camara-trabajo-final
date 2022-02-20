@@ -8,7 +8,7 @@ import { SessionContext } from "../helper/Session";
 import './style.css'
 
 
-export const TableDices = () => {
+const TableDices = () => {
   const { state } = useContext(SessionContext);
   const { dados, finTurno, puntaje, oportunidades, eliminarJugada } = state;
   const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice } = useDices();
@@ -46,3 +46,4 @@ export const TableDices = () => {
     </Grid>
   );
 };
+export default TableDices;
