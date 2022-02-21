@@ -13,6 +13,24 @@ const TableDices = () => {
   const { dados, finTurno, puntaje, oportunidades } = state;
   const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice } = useDices();
 
+  
+
+  const ordenarDados = () =>{
+    let dados2 = dados
+    dados2.sort(function (a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    console.log(dados2)
+    return dados2
+  }
+
   return (
     <Grid
       container
@@ -44,8 +62,8 @@ const TableDices = () => {
         {
           !finTurno &&
           <div className="table_dices">
-            {dados.map((d, index) => (
-            <DiceAndCheck num={d.num}
+            {ordenarDados(dados).map((d, index) => (
+            <DiceAndCheck dado={d}
               index={index}
               key={index}
               oportunidades={oportunidades}

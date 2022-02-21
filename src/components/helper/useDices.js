@@ -7,9 +7,13 @@ export const useDices = () => {
     const { setDados, setFinTurno, setOportunidades } = actions
 
     //Cambia el valor de static en el dado y puede ser cambiado en la siguiente oportunidad
-    const changeValueIndexDice = (index) => {
+    const changeValueIndexDice = (name) => {
         let newDices = dados
-        newDices[index].static = !newDices[index].static
+        newDices.forEach(function(dado) {
+            if (dado.name == name) {
+                dado.static = !dado.static
+            }
+          });          
         setDados(newDices)
     }
 
@@ -19,6 +23,7 @@ export const useDices = () => {
         for (let i = 0; i < 5; i++) {
             let number = Math.floor(Math.random() * 6) + 1
             newDices[i].num = number
+            newDices[i].static = false
         }
         setDados(newDices)
         setFinTurno(false)

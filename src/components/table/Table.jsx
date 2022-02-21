@@ -19,21 +19,16 @@ import { StyledTableCell, StyledTableRow } from "../shared/layout/Shared";
 export const useStyles = makeStyles((theme) => ({
   table: {
     width: "18rem",
-    paddingBottom: "3px",
   },
 }));
 
 const TableScore = () => {
   const { state } = useContext(SessionContext);
   const { puntaje, oportunidades } = state;
-  const { totalPuntaje, jugadaEliminada } = useJugadas();
+  const { jugadaEliminada } = useJugadas();
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
 
-  const handleChange = (index, e) => {
-    e.preventDefault()    
-    jugadaEliminada(index)
-   }
 
   const segunTipoDeJugada = (status) => {
     switch (status) {
@@ -66,22 +61,13 @@ const TableScore = () => {
                 <StyledTableCell align="center">{row.valor}</StyledTableCell>
                 <StyledTableCell align="center">
                   { oportunidades == 3 && row.played == '' ?
-                    <Checkbox className='checkbox' checked={checked} onChange={e => handleChange(index, e)} />
+                    <Checkbox className='checkbox' checked={checked} onChange={() => jugadaEliminada(index)} />
                     :
                     segunTipoDeJugada(row.played)
                   }
                 </StyledTableCell>
               </StyledTableRow>
-            ))}
-            <StyledTableRow>
-              <StyledTableCell component="th">
-                <Box style={{ margin: '0.7rem' }} fontWeight="fontWeightBold" fontSize={15}>
-                  Total
-                </Box>
-              </StyledTableCell>
-              <StyledTableCell align="center" style={{ margin: '0.7rem' }} >{totalPuntaje()}</StyledTableCell>
-              <StyledTableCell align="center" style={{ margin: '0.7rem' }}>-</StyledTableCell>
-            </StyledTableRow>
+            ))}            
           </TableBody>
         </Table>
       </TableContainer>
