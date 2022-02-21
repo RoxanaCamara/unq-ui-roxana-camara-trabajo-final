@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
 
 const TableScore = () => {
   const { state } = useContext(SessionContext);
-  const { puntaje, eliminarJugada } = state;
+  const { puntaje, oportunidades } = state;
   const { totalPuntaje, jugadaEliminada } = useJugadas();
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
@@ -65,7 +65,7 @@ const TableScore = () => {
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.valor}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {eliminarJugada && row.played == '' ?
+                  { oportunidades == 3 && row.played == '' ?
                     <Checkbox className='checkbox' checked={checked} onChange={e => handleChange(index, e)} />
                     :
                     segunTipoDeJugada(row.played)

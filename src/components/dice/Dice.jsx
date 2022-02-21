@@ -1,16 +1,7 @@
-import React, { useState } from "react";
-import { Tooltip, Checkbox } from "@material-ui/core";
+import React from "react";
 import "./style.css";
 
-const Dice = ({ num, index, changeValueIndexDice }) => {
-  const [checked, setChecked] = useState(false);
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    setChecked(event.target.checked);
-    changeValueIndexDice(index);
-  };
-
+const Dice = ({ num }) => {
   return (
     <>
       <div className="nono">
@@ -73,13 +64,6 @@ const Dice = ({ num, index, changeValueIndexDice }) => {
             </div>
           </div>
         )}
-        <Tooltip title="* Tilde el dado si NO quiere volver a tirarlo">
-          <Checkbox
-            checked={checked}
-            onChange={handleChange}
-            inputProps={{ "aria-label": "primary checkbox" }}
-          />
-        </Tooltip>
       </div>
     </>
   );

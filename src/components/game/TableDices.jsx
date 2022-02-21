@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
-import { Dices } from "../dice/Dices";
 import { Oportunity } from "./Oportunity";
 import { Jugadas } from "./Jugadas";
 import { useDices } from "../helper/useDices";
 import { SessionContext } from "../helper/Session";
 import './style.css'
+import DiceAndCheck from "../dice/DiceAndCheck";
 
 
 const TableDices = () => {
   const { state } = useContext(SessionContext);
-  const { dados, finTurno, puntaje, oportunidades, eliminarJugada } = state;
+  const { dados, finTurno, puntaje, oportunidades } = state;
   const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice } = useDices();
 
   return (
@@ -30,19 +30,31 @@ const TableDices = () => {
             Tirar Dados
           </button>
         ) : (
-          <Oportunity
-            oportunidades={oportunidades}
-            eliminarJugada={eliminarJugada}
-            tirarDadosSeleccionados={tirarDadosSeleccionados}
-          />
+          <>
+            <Oportunity
+              oportunidades={oportunidades}
+              tirarDadosSeleccionados={tirarDadosSeleccionados}
+            />
+            <Jugadas jugadasDisponibles={puntaje} />
+          </>
         )}
       </Grid>
 
       <Grid item>
-        <Dices dados={dados} finTurno={finTurno} changeValueIndexDice={changeValueIndexDice} />
+        {
+          !finTurno &&
+          <div className="table_dices">
+            {dados.map((d, index) => (
+            <DiceAndCheck num={d.num}
+              index={index}
+              key={index}
+              oportunidades={oportunidades}
+              changeValueIndexDice={changeValueIndexDice}
+            />
+          ))}
+          </div>          
+        }
       </Grid>
-
-      <Grid item>{!finTurno && <Jugadas jugadasDisponibles={puntaje} />}</Grid>
     </Grid>
   );
 };

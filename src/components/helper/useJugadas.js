@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { dadosDefault } from "../shared/utils/Utils"
 import { SessionContext } from "./Session"
 
 export const useJugadas = () => {
@@ -9,20 +10,20 @@ export const useJugadas = () => {
         '' QUE SERIA IGUAL A VACIO
     */
 
-    //revisar la logica y hacer los cambios respecto a la implementacion
     const { state, actions } = useContext(SessionContext)
-    const { dados, puntaje, eliminarJugada } = state
+    const { dados, puntaje } = state
 
-    const { setFinTurno, setFinPartida, setpuntaje, setEliminarJugada, setDados } = actions
-
-
-    //cuenta los repetidos de los dados
-    const cantRepetidos = (num) => {
-        return dados.filter(d => d == num).length
-    }
+    const { setFinTurno, setFinPartida, setpuntaje, setDados, setOportunidades } = actions
 
     const siEstaXNoDebeEstarY = (x, y) => {
-        return dados[x] == x && !dados[y] == y
+        return dados[x].num == x && !dados[y].num == y
+    }
+    
+    //cuenta los repetidos de los dados
+    const cantRepetidos = (num) => {
+        return dados.filter(function (d) {
+            return  d.num === num
+        }).length
     }
 
     const existeEsaCantRepetidos = (num) => {
@@ -39,12 +40,12 @@ export const useJugadas = () => {
 
     const esEscalera = () => {
         //[X,2,3,4,5,6]  [1,2,3,4,5,X]
-        dados.sort(function(a, b) { return a - b;});
+        dados.sort(function(a, b) { return a.num - b.num;});
         let escalera = false
         let index = 1
             for (let i = 0; i > 5; i ++){
                 if(index != 1 || index != 6){
-                    escalera = escalera && dados[i] == index
+                    escalera = escalera && dados[i].num == index
                 } 
                 index++
             }
@@ -53,8 +54,9 @@ export const useJugadas = () => {
 
     const esGenerala = () => {
         //todos los numeros de los dados son iguales
-        // return existeEsaCantRepetidos(5) 
-        return dados.every( (val, arr) => val === arr[0] ) 
+        return dados.every( function (d) {
+            return d.num === dados[0].num
+        } ) 
     }
 
     const esPoker = () => {
@@ -98,6 +100,7 @@ export const useJugadas = () => {
         puntajeNew[index].played= 'JUGADO'
         setpuntaje(puntajeNew)
         setFinTurno(true)
+        setOportunidades(0)
         setFinPartida(terminoElJuego() )
     }
 
@@ -116,16 +119,12 @@ export const useJugadas = () => {
         puntajeNew[index].played= 'ANULADO'
         setpuntaje(puntajeNew)
         setFinTurno(true)
-        setEliminarJugada(false)
+        setOportunidades(0)
         setFinPartida(terminoElJuego() )
-    }
-
-    const existeAlgunaJugada = (hayJugada) => {
-       setEliminarJugada( (eliminarJugada || hayJugada))   
-    }
+    } 
 
     const initGame = () => {
-        setDados([])
+        setDados(dadosDefault)
         setpuntaje(initPuntaje(puntaje))
         setFinPartida(false)
     }
@@ -135,7 +134,6 @@ export const useJugadas = () => {
         p.forEach(function (i) {  i.played=''; i.valor= 0 })
         return p;
     }
-    
 
-    return { usarTirada, saberPuntaje, totalPuntaje, jugadaEliminada, existeAlgunaJugada, initGame }
+    return { usarTirada, saberPuntaje, totalPuntaje, jugadaEliminada, initGame }
 }

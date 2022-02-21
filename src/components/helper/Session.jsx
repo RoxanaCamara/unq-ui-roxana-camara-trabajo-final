@@ -1,25 +1,6 @@
 import { createContext, useState } from "react";
+import { dadosDefault, puntajeDefault } from "../shared/utils/Utils";
 
-const puntajeDefault = [
-    { name: 'Solo 1', valor: 0, played: '' },
-    { name: 'Solo 2', valor: 0, played: '' },
-    { name: 'Solo 3', valor: 0, played: '' },
-    { name: 'Solo 4', valor: 0, played: '' },
-    { name: 'Solo 5', valor: 0, played: '' },
-    { name: 'Solo 6', valor: 0, played: '' },
-    { name: 'Escalera', valor: 0, played: '' },
-    { name: 'Poker', valor: 0, played: '' },
-    { name: 'Full', valor: 0, played: '' },
-    { name: 'Generala', valor: 0, played: '' }
-]
-
-const dadosDefault = [ 
-    {name: 'd1', num: 0 , oldNum: 0},
-    {name: 'd2', num: 0 , oldNum: 0},
-    {name: 'd3', num: 0 , oldNum: 0},
-    {name: 'd4', num: 0 , oldNum: 0},
-    {name: 'd5', num: 0 , oldNum: 0}
-]
 
 export const SessionContext = createContext({
     state: {
@@ -27,8 +8,7 @@ export const SessionContext = createContext({
         finTurno: false,
         finPartida: false,
         dados: dadosDefault,        
-        puntaje: [],
-        eliminarJugada: false,
+        puntaje: puntajeDefault,
         oportunidades: 1
     },
     actions: {
@@ -37,7 +17,6 @@ export const SessionContext = createContext({
         setFinPartida: (nn) => { },
         setDados: (nn) => { },
         setpuntaje: (nn) => { },
-        setEliminarJugada: (nn) => { },
         setOportunidades: (nn) => { }
     }
 })
@@ -47,17 +26,15 @@ export const SessionProvider = ({ children }) => {
     const [inicioPartida, setInicioPartida] = useState(false)
     const [finTurno, setFinTurno] = useState(true)
     const [finPartida, setFinPartida] = useState(false)
-    const [dados, setDados] = useState([])
+    const [dados, setDados] = useState(dadosDefault)
     const [puntaje, setpuntaje] = useState(puntajeDefault)
-    const [eliminarJugada, setEliminarJugada] = useState(false)
-    const [oportunidades, setOportunidades] = useState(1)
+    const [oportunidades, setOportunidades] = useState(0)
 
     const state = {
         inicioPartida,        
         dados,
         oportunidades,
         puntaje,
-        eliminarJugada,
         finTurno,
         finPartida           
     }
@@ -68,7 +45,6 @@ export const SessionProvider = ({ children }) => {
         setFinPartida,
         setDados,
         setpuntaje,
-        setEliminarJugada,
         setOportunidades
     }
 

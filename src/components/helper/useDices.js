@@ -2,48 +2,46 @@ import { useContext } from "react"
 import { SessionContext } from "./Session"
 
 export const useDices = () => {
-
     const { state, actions } = useContext(SessionContext)
     const { dados, oportunidades } = state
-    const { setDados, setFinTurno, setOportunidades, setEliminarJugada } = actions
+    const { setDados, setFinTurno, setOportunidades } = actions
 
-    //Agrega cero o el numero original en el index de la lista de dados
+    //Cambia el valor de static en el dado y puede ser cambiado en la siguiente oportunidad
     const changeValueIndexDice = (index) => {
-        let dadosV = dados 
-        dadosV[index] = 0
-        setDados(dadosV)
+        let newDices = dados
+        newDices[index].static = !newDices[index].static
+        setDados(newDices)
     }
 
-    //Agrega 6 numeros random en una lista de dados
+    //Agrega un numero random en la propiedad num en una lista de dados
     const tirarDados = () => {
-        let dices = []
+        let newDices = dados
         for (let i = 0; i < 5; i++) {
             let number = Math.floor(Math.random() * 6) + 1
-            dices.push(number)
+            newDices[i].num = number
         }
-        setDados(dices);
-        setFinTurno(false) 
-        setOportunidades(1)       
+        setDados(newDices)
+        setFinTurno(false)
+        setOportunidades(0)
     }
 
-    //Agrega un numero random reemplazando el cero una lista de dados
+    // Cambia el valor de static en el dado y agrega un numero random reemplazando el anterior valor
     const tirarDadosSeleccionados = () => {
-            let dados2 = dados
-
-            dados2.map(function (i, index) {
-                if (i == 0) {
-                    let number = Math.floor(Math.random() * 6) + 1
-                    dados2[index] = number
-                }
-            })
-            setDados(dados2)
-            setOportunidades( oportunidades + 1 )
-            if(oportunidades == 3){
-                setEliminarJugada(true)
-                setOportunidades(1)
+        let newDices = dados
+        for (let i = 0; i < 5; i++) {
+            if (!newDices[i].static) {
+                let number = Math.floor(Math.random() * 6) + 1
+                newDices[i].num = number
+                newDices[i].static = false
             }
         }
-    
+        setDados(newDices)
+        setOportunidades(oportunidades + 1)
+        if (oportunidades == 3) {
+            setOportunidades(0)
+        }
+    }
+
     return { tirarDados, tirarDadosSeleccionados, changeValueIndexDice }
 
 }
