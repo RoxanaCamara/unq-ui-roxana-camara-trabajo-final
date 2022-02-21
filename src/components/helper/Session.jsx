@@ -13,13 +13,21 @@ const puntajeDefault = [
     { name: 'Generala', valor: 0, played: '' }
 ]
 
+const dadosDefault = [ 
+    {name: 'd1', num: 0 , oldNum: 0},
+    {name: 'd2', num: 0 , oldNum: 0},
+    {name: 'd3', num: 0 , oldNum: 0},
+    {name: 'd4', num: 0 , oldNum: 0},
+    {name: 'd5', num: 0 , oldNum: 0}
+]
+
 export const SessionContext = createContext({
     state: {
         iniciaPartida: false,
         finTurno: false,
         finPartida: false,
-        dados: [],
-        puntaje: puntajeDefault,
+        dados: dadosDefault,        
+        puntaje: [],
         eliminarJugada: false,
         oportunidades: 1
     },

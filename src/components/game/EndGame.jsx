@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
 import { SessionContext } from '../helper/Session';
 import { useJugadas } from '../helper/useJugadas';
@@ -20,7 +22,7 @@ const EndGameModal = () => {
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={finPartida }>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Terminado!
+          Terminado!  <FontAwesomeIcon style={{ margin: '0.7rem' }} icon={faTrophy} size="lg" />
         </DialogTitle>
         <DialogContent dividers>
         <Typography variant="h2" component="h2" gutterBottom>

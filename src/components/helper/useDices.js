@@ -8,9 +8,9 @@ export const useDices = () => {
     const { setDados, setFinTurno, setOportunidades, setEliminarJugada } = actions
 
     //Agrega cero o el numero original en el index de la lista de dados
-    const changeValueIndexDice = (index, num = 0) => {
+    const changeValueIndexDice = (index) => {
         let dadosV = dados 
-        dadosV[index] = num
+        dadosV[index] = 0
         setDados(dadosV)
     }
 

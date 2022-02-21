@@ -7,12 +7,8 @@ const Dice = ({ num, index, changeValueIndexDice }) => {
 
   const handleChange = (event) => {
     event.preventDefault();
-    if (event.target.checked) {
-      changeValueIndexDice(index, num);
-    } else {
-      changeValueIndexDice(index);
-    }
     setChecked(event.target.checked);
+    changeValueIndexDice(index);
   };
 
   return (

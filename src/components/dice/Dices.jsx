@@ -3,7 +3,8 @@ import Dice from './Dice';
 import './style.css'
 
 
-export const Dices = ( { dados, finTurno, changeValueIndexDice } ) => {              
+export const Dices = ( { dados, finTurno, changeValueIndexDice } ) => {  
+    console.log(dados)            
     return <div className="table_dices">
             {
                 !finTurno &&
