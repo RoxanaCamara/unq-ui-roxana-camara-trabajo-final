@@ -16,3 +16,12 @@
     (tres de un mismo número y un par). Si es servido vale 35 puntos, de lo contrario 30.
 ## Escalera 
     (1-2-3-4-5 o 2-3-4-5-6). Si es servida se le otorgan 25 puntos y si no lo es, 20
+
+
+### Tests
+
+## Recordatorio
+Los snapshops se utiliza para hacer tests dentro del codigo, es algun tipo de screenshot
+con *shallow* es mas que suficiente para el test
+
+Para testear hooks o implementaciones del componente utilizamos *moun*

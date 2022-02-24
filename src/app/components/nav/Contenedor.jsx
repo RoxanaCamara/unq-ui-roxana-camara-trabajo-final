@@ -21,9 +21,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Contenedor = ({ children }) => {
+  const { state } = useContext(SessionContext);
+  const { tipoDeJugada } = state;
   const classes = useStyles();
-
   const history = useHistory()
+
   const handleRedirect = (text) => {
     history.push(text)
   }
@@ -34,7 +36,7 @@ export const Contenedor = ({ children }) => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect("/solitarie")}>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect(tipoDeJugada)}>
               <FontAwesomeIcon icon={faDice} size="lg" />
             </IconButton>
             <Typography variant="h2" className={classes.title}>

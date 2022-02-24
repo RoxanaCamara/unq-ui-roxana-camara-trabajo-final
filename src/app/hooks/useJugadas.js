@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { dadosDefault } from "../shared/utils/Utils"
+import { dadosDefault } from "../../shared/utils/Utils"
 import { SessionContext } from "./Session"
 
 export const useJugadas = () => {

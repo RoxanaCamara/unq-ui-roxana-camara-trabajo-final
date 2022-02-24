@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./style.css";
 
 const Dice = ({ num }) => {
@@ -67,6 +68,11 @@ const Dice = ({ num }) => {
       </div>
     </>
   );
+};
+
+
+Dice.propTypes = {
+  num: PropTypes.number.isRequired,
 };
 
 export default Dice;

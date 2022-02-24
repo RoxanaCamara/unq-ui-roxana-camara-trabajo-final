@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import dices from "./dice.mp4";
 import "../login/style.css";
+import { SessionContext } from "../helper/Session";
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,10 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
+  const { actions } = useContext(SessionContext);
+  const { setTipoDeJugada } = actions;
+
+
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -31,6 +36,7 @@ const Login = () => {
 
   const handleRedirect = (text) => {
     history.push(text);
+    setTipoDeJugada(text)
   };
 
   return (

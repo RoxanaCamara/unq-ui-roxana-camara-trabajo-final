@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faQuestion, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { SessionContext } from "../helper/Session";
-import "../table/style.css";
+import "./style.css";
 import { useJugadas } from "../helper/useJugadas";
 import { StyledTableCell, StyledTableRow } from "../shared/layout/Shared";
 

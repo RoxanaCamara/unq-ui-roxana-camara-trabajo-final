@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { dadosDefault, puntajeDefault } from "../shared/utils/Utils";
+import { dadosDefault, puntajeDefault } from "../../shared/utils/Utils";
 
 
 export const SessionContext = createContext({
@@ -9,7 +9,8 @@ export const SessionContext = createContext({
         finPartida: false,
         dados: dadosDefault,        
         puntaje: puntajeDefault,
-        oportunidades: 1
+        oportunidades: 1,
+        tipoDeJugada: ''
     },
     actions: {
         setInicioPartida: (nn) => { },
@@ -17,7 +18,8 @@ export const SessionContext = createContext({
         setFinPartida: (nn) => { },
         setDados: (nn) => { },
         setpuntaje: (nn) => { },
-        setOportunidades: (nn) => { }
+        setOportunidades: (nn) => { },
+        setTipoDeJugada: (nn) => { }
     }
 })
 
@@ -29,6 +31,7 @@ export const SessionProvider = ({ children }) => {
     const [dados, setDados] = useState(dadosDefault)
     const [puntaje, setpuntaje] = useState(puntajeDefault)
     const [oportunidades, setOportunidades] = useState(0)
+    const [tipoDeJugada, setTipoDeJugada] = useState('')
 
     const state = {
         inicioPartida,        
@@ -36,7 +39,8 @@ export const SessionProvider = ({ children }) => {
         oportunidades,
         puntaje,
         finTurno,
-        finPartida           
+        finPartida,
+        tipoDeJugada          
     }
 
     const actions = {
@@ -45,7 +49,8 @@ export const SessionProvider = ({ children }) => {
         setFinPartida,
         setDados,
         setpuntaje,
-        setOportunidades
+        setOportunidades,
+        setTipoDeJugada
     }
 
     return <SessionContext.Provider value={{ state, actions }}> {children} </SessionContext.Provider>
