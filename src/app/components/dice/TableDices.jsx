@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
-import { Oportunity } from "./Oportunity";
-import { Jugadas } from "./Jugadas";
+import { Oportunity } from "../game/Oportunity";
+import { Jugadas } from "../game/Jugadas";
 import { useDices } from "../helper/useDices";
 import { SessionContext } from "../helper/Session";
 import './style.css'
-import DiceAndCheck from "../dice/DiceAndCheck";
+import DiceAndCheck from "./DiceAndCheck";
 
 
 const TableDices = () => {
@@ -63,7 +63,9 @@ const TableDices = () => {
           !finTurno &&
           <div className="table_dices">
             {ordenarDados(dados).map((d, index) => (
-            <DiceAndCheck dado={d}
+            <DiceAndCheck 
+              name={d.name} 
+              num={d.num}            
               index={index}
               key={index}
               oportunidades={oportunidades}
