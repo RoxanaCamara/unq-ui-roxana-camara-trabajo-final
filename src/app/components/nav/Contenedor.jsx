@@ -5,6 +5,7 @@ import { faDice, faPencilRuler, faSignOutAlt } from '@fortawesome/free-solid-svg
 import { useHistory } from 'react-router-dom';
 import { Button, Container, IconButton, Typography, Toolbar, AppBar } from '@material-ui/core';
 import { SessionContext } from '../../hooks/Session';
+import { useJugadas } from '../../hooks/useJugadas';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
 export const Contenedor = ({ children }) => {
   const { state } = useContext(SessionContext);
   const { tipoDeJugada } = state;
+  const { initGame } = useJugadas()
   const classes = useStyles();
   const history = useHistory()
 
   const handleRedirect = (text) => {
     history.push(text)
+    initGame()
   }
 
 
@@ -43,7 +46,7 @@ export const Contenedor = ({ children }) => {
             <Typography variant="h2" className={classes.title}>
               Generala
             </Typography>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect("/rules")}>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => history.push("/rules")}>
               <FontAwesomeIcon icon={faPencilRuler} size="lg" />
               <Typography variant="h6" className={classes.title}>
                 Reglas
