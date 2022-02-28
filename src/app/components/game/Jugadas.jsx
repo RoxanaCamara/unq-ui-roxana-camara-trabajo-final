@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { useJugadas } from '../helper/useJugadas';
 import './style.css'
+import { useJugadas } from '../../hooks/useJugadas';
 
 
 export const Jugadas = (props) => {

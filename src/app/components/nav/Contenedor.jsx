@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faPencilRuler, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom';
 import { Button, Container, IconButton, Typography, Toolbar, AppBar } from '@material-ui/core';
+import { SessionContext } from '../../hooks/Session';
 
 const useStyles = makeStyles((theme) => ({
   root: {

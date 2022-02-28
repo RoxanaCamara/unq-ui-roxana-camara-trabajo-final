@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { dadosDefault, puntajeDefault } from "../../shared/utils/Utils";
+import { dadosDefault, puntajeDefault } from "../shared/utils/Utils";
 
 
 export const SessionContext = createContext({

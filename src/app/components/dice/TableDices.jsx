@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
 import { Oportunity } from "../game/Oportunity";
 import { Jugadas } from "../game/Jugadas";
-import { useDices } from "../helper/useDices";
-import { SessionContext } from "../helper/Session";
+import { useDices } from "../../hooks/useDices";
 import './style.css'
 import DiceAndCheck from "./DiceAndCheck";
+import { SessionContext } from "../../hooks/Session";
 
 
 const TableDices = () => {

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import dices from "./dice.mp4";
 import "../login/style.css";
-import { SessionContext } from "../helper/Session";
+import { SessionContext } from "../../hooks/Session";
 
 const useStyles = makeStyles({
   root: {

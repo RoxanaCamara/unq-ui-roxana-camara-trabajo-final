@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import TableScore from '../table/Table';
-import TableDices from '../game/TableDices';
 import EndGameModal from '../game/EndGame';
 import { Contenedor } from '../nav/Contenedor';
+import TableScore from '../table/TableScore';
+import TableDices from '../dice/TableDices';
 
 const Solitarie = () => {
   return (

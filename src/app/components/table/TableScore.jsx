@@ -11,10 +11,11 @@ import {
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faQuestion, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { SessionContext } from "../helper/Session";
+
 import "./style.css";
-import { useJugadas } from "../helper/useJugadas";
-import { StyledTableCell, StyledTableRow } from "../shared/layout/Shared";
+import { StyledTableCell, StyledTableRow } from "../../shared/layout/Shared";
+import { SessionContext } from "../../hooks/Session";
+import { useJugadas } from "../../hooks/useJugadas";
 
 export const useStyles = makeStyles((theme) => ({
   table: {

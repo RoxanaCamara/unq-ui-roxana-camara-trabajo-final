@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
-import { SessionContext } from '../helper/Session';
-import { useJugadas } from '../helper/useJugadas';
+import { SessionContext } from '../../hooks/Session';
+import { useJugadas } from '../../hooks/useJugadas';
 
 const EndGameModal = () => {
 

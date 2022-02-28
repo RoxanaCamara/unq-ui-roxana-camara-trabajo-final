@@ -3,10 +3,10 @@ import { Chip, Grid } from '@material-ui/core'
 import { Contenedor } from '../nav/Contenedor'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'
-import TableScore from '../table/Table'
-import TableDices from '../game/TableDices'
+import TableScore from '../table/TableScore';
+import TableDices from '../dice/TableDices';
 
-const GameMultiplayer = () => {
+const Multiplayer = () => {
     return (
         <Contenedor>
             <Grid container xs={12} direction="row" >
@@ -25,4 +25,4 @@ const GameMultiplayer = () => {
         </Contenedor>
     )
 }
-export default GameMultiplayer;
+export default Multiplayer;
