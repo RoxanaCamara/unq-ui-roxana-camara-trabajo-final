@@ -19,7 +19,8 @@ import { useJugadas } from "../../hooks/useJugadas";
 
 export const useStyles = makeStyles((theme) => ({
   table: {
-    width: "18rem",
+    width: "16rem",
+    
   },
 }));
 

@@ -9,11 +9,11 @@ const Solitarie = () => {
   return (
     <Contenedor>
       <Grid container xs={12} direction="row">
-        <Grid item sm={5}>
+        <Grid item sm={2}>
           <TableScore />
         </Grid>
 
-        <Grid item sm={7}>
+        <Grid item sm={9}>
           <TableDices />
         </Grid>
 

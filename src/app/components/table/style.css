@@ -1,9 +1,8 @@
 .book{
-    margin-top: 3rem;
+    margin-top: 1rem;
     padding-bottom: 0px;
-    width: 90%;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
-    border: 11px inset #0a050a;
+    border: 7px inset #0a050a;
 }

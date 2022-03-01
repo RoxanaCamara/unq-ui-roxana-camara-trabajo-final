@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
@@ -64,10 +64,8 @@ export const Contenedor = ({ children }) => {
           </Toolbar>
         </AppBar>
       </div>
-      <Container fixed>
-        <main>
-          {children}
-        </main>
+      <Container>       
+        {children}       
       </Container>
     </div>
   )

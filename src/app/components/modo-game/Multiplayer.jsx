@@ -10,15 +10,13 @@ const Multiplayer = () => {
     return (
         <Contenedor>
             <Grid container xs={12} direction="row" >
-                <Grid item sm={4} style={{ backgroundColor: '#D1D1D1'}}> 
-                    <Chip variant="outlined" label="Roxana" color="primary" icon={<FontAwesomeIcon icon={faHeadSideMask} size="lg" />} />                   
+                <Grid item sm={3} style={{ backgroundColor: '#D1D1D1'}}> 
                     <TableScore />
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item sm={6}>
                     <TableDices/>
                 </Grid>
-                <Grid item sm={4}>
-                    <Chip variant="outlined" label="Narela" color="secondary" icon={<FontAwesomeIcon icon={faHeadSideMask} size="lg" />} />
+                <Grid item sm={3}>
                     <TableScore/>
                 </Grid>               
             </Grid>
