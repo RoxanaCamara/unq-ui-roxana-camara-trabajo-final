@@ -5,7 +5,6 @@ import "./style.css";
 const Dice = ({ num }) => {
   return (
     <>
-      <div className="nono">
         {num == 1 && (
           <div className="first-face">
             <span className="pip"></span>
@@ -65,7 +64,6 @@ const Dice = ({ num }) => {
             </div>
           </div>
         )}
-      </div>
     </>
   );
 };

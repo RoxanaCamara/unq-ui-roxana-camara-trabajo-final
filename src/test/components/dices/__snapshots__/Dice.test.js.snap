@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test del component <Dice/> Debemos testear cuando reciba un numero del 1 al 6 1`] = `
+<Fragment>
+  <div
+    className="fourth-face"
+  >
+    <div
+      className="column"
+    >
+      <span
+        className="pip"
+      />
+      <span
+        className="pip"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <span
+        className="pip"
+      />
+      <span
+        className="pip"
+      />
+    </div>
+  </div>
+</Fragment>
+`;
