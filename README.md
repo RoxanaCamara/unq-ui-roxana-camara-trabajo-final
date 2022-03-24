@@ -25,3 +25,5 @@ Los snapshops se utiliza para hacer tests dentro del codigo, es algun tipo de sc
 con *shallow* es mas que suficiente para el test
 
 Para testear hooks o implementaciones del componente utilizamos *moun*
+
+Quiero subir a heroku
