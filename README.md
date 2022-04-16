@@ -27,4 +27,10 @@ con *shallow* es mas que suficiente para el test
 Para testear hooks o implementaciones del componente utilizamos *moun*
 
 Quiero subir a heroku
-ewewe
+
+#### ###########################################################################################
+Para hacerlo multijugador
+1-hacer el back
+
+###
+Responsive

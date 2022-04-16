@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import dices from "./dice.mp4";
-import "../login/style.css";
+import "./style.css";
 import { SessionContext } from "../../hooks/Session";
+import LoginUser from '../../components/LoginUser/LoginUser'
 
 const useStyles = makeStyles({
   root: {
@@ -67,15 +68,22 @@ const Login = () => {
               '"la generala nos salva cuando el ocio se está por volver aburrimiento"'
             }
           </Typography>
+
+          <LoginUser/>
+          
         </CardContent>
+
+
+        {false  &&
         <CardActions>
-          <button className="button-18" onClick={() => handleRedirect("/solitarie")}>
-            Solitario
-          </button>
-          <button className="button-18" onClick={() => handleRedirect("/multiplayer")}>
-            Multijugador
-          </button>
-        </CardActions>
+        <button className="button-18" onClick={() => handleRedirect("/solitarie")}>
+          Solitario
+        </button>
+        <button className="button-18" onClick={() => handleRedirect("/multiplayer")}>
+          Multijugador
+        </button>
+      </CardActions>
+      }
       </Card>
      
     </div>

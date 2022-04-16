@@ -4,7 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import  Login from "../components/login/Login";
+import  Login from "../modules/Login/Login";
 import Multiplayer from "../components/modo-game/Multiplayer";
 import Solitarie from "../components/modo-game/Solitarie";
 import Rules from "../components/rules/Rules";
