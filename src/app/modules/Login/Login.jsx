@@ -55,12 +55,10 @@ const Login = () => {
           >
             EL famoso juego de mesa
           </Typography>
-          <Typography variant="h5" component="h2">
-            {bull}
-            {bull} Generala {bull}
-            {bull}
+          <Typography variant="h2" gutterBottom>
+            Generala
           </Typography>
-          
+         
 
           <LoginUser/>
           
