@@ -9,7 +9,8 @@ import Multiplayer from "../components/modo-game/Multiplayer";
 import Solitarie from "../components/modo-game/Solitarie";
 import Rules from "../modules/Rules/Rules";
 import { SessionProvider } from "../hooks/Session";
-import { Home } from "../modules/Home/Home";
+import  Home from "../modules/Home/Home";
+import CreateAcount from "../modules/Login/CreateAcount";
 
 
 const GeneralaRoutes = () => {
@@ -21,6 +22,7 @@ const GeneralaRoutes = () => {
           <Route exact path="/home" component={Home} />
           <Route exact path="/solitarie" component={Solitarie} />
           <Route exact path="/multiplayer" component={Multiplayer} />
+          <Route exact path="/createAccount" component={CreateAcount} />
           <Route exact path="/" component={Login} />
         </Switch>
       </SessionProvider>

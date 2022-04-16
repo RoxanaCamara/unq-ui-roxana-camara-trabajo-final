@@ -1,52 +1,124 @@
 import React from "react";
-import { Card, CardContent, makeStyles, Typography } from "@material-ui/core";
-import dices from "./dice.mp4";
-import "./style.css";
-import LoginUser from "../../components/LoginUser/LoginUser";
+import { makeStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import clsx from "clsx";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { Button, Typography } from "@material-ui/core";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import EmailIcon from "@material-ui/icons/Email";
+import LoginCard from "../../components/LoginCard/LoginCard";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 275,
-    margin: "1rem 5rem 1rem 5rem",
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+  loginButton: {
+    padding: '2% 35%'
+  },
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: "25ch",
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
-});
+}));
 
 const Login = () => {
   const classes = useStyles();
-  return (
-    <div className="body">
-      <video controls muted="true" autoPlay loop>
-        <source src={dices} type="video/mp4" />
-        <source src={dices} type="video/ogg" />
-      </video>
-      <Card className={classes.root}>
-        <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            EL famoso juego de mesa
-          </Typography>
-          <Typography variant="h2" gutterBottom>
-            Generala
-          </Typography>
+  const [values, setValues] = React.useState({
+    amount: "",
+    password: "",
+    weight: "",
+    weightRange: "",
+    showPassword: false,
+  });
 
-          <LoginUser />
-        </CardContent>
-      </Card>
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  return (
+    <LoginCard>
+
+    
+    <div>
+      
+      <div>
+        <TextField
+          className={classes.margin}
+          id="input-with-icon-textfield"
+          label="Email or Name User"
+        />
+        <FormControl className={clsx(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-password">
+            Password
+          </InputLabel>
+          <Input
+            id="standard-adornment-password"
+            type={values.showPassword ? "text" : "password"}
+            value={values.password}
+            onChange={handleChange("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </div>
+
+      <Button
+        variant="contained"
+        size="small"
+        color="primary"
+        className={classes.loginButton}
+      >
+        Login
+      </Button>
+      <Typography variant="body2" component="p">
+        Forgot password?
+      </Typography>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>
+        Or log with:
+      </Typography>
+      <FacebookIcon />
+      <InstagramIcon />
+      <EmailIcon />
+
+      <Typography variant="body2" component="p">
+        Don't have an account? <b>Sign up</b>
+      </Typography>
     </div>
+    </LoginCard>
   );
 };
+
 export default Login;

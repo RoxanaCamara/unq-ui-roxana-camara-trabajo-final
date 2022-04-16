@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Home = () => {
+const Home = () => {
   const classes = useStyles();
 
   const { actions } = useContext(SessionContext);
@@ -62,3 +62,4 @@ export const Home = () => {
     </Contenedor>
   );
 };
+export default Home;

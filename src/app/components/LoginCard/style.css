@@ -21,3 +21,9 @@ video{
 video::-webkit-media-controls {
     display: none;
 }
+
+.acountIcon{
+    color: blue;
+    width: 510px;
+    
+}
