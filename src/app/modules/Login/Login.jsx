@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
+import React from "react";
+import { Card, CardContent, makeStyles, Typography } from "@material-ui/core";
 import dices from "./dice.mp4";
 import "./style.css";
-import { SessionContext } from "../../hooks/Session";
-import LoginUser from '../../components/LoginUser/LoginUser'
+import LoginUser from "../../components/LoginUser/LoginUser";
 
 const useStyles = makeStyles({
   root: {
@@ -26,23 +23,10 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
-  const { actions } = useContext(SessionContext);
-  const { setTipoDeJugada } = actions;
-
-
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-
-  const history = useHistory();
-
-  const handleRedirect = (text) => {
-    history.push(text);
-    setTipoDeJugada(text)
-  };
-
   return (
     <div className="body">
-       <video controls muted="true" autoPlay loop>
+      <video controls muted="true" autoPlay loop>
         <source src={dices} type="video/mp4" />
         <source src={dices} type="video/ogg" />
       </video>
@@ -58,35 +42,10 @@ const Login = () => {
           <Typography variant="h2" gutterBottom>
             Generala
           </Typography>
-         
 
-          <LoginUser/>
-          
+          <LoginUser />
         </CardContent>
-
-
-        {false  &&
-        <CardActions>
-           <Typography variant="body2" component="p">
-            {
-              '"la generala nos salva cuando el ocio se está por volver aburrimiento"'
-            }
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            ¿Cual vas a jugar hoy?
-          </Typography>
-         
-
-        <button className="button-18" onClick={() => handleRedirect("/solitarie")}>
-          Solitario
-        </button>
-        <button className="button-18" onClick={() => handleRedirect("/multiplayer")}>
-          Multijugador
-        </button>
-      </CardActions>
-      }
       </Card>
-     
     </div>
   );
 };

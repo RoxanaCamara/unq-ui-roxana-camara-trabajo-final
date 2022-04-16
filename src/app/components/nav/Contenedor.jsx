@@ -40,7 +40,7 @@ export const Contenedor = ({ children }) => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect(tipoDeJugada)}>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => handleRedirect('/home')}>
               <FontAwesomeIcon icon={faDice} size="lg" />
             </IconButton>
             <Typography variant="h2" className={classes.title}>
