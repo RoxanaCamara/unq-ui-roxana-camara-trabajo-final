@@ -60,14 +60,7 @@ const Login = () => {
             {bull} Generala {bull}
             {bull}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            ¿Cual vas a jugar hoy?
-          </Typography>
-          <Typography variant="body2" component="p">
-            {
-              '"la generala nos salva cuando el ocio se está por volver aburrimiento"'
-            }
-          </Typography>
+          
 
           <LoginUser/>
           
@@ -76,6 +69,16 @@ const Login = () => {
 
         {false  &&
         <CardActions>
+           <Typography variant="body2" component="p">
+            {
+              '"la generala nos salva cuando el ocio se está por volver aburrimiento"'
+            }
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            ¿Cual vas a jugar hoy?
+          </Typography>
+         
+
         <button className="button-18" onClick={() => handleRedirect("/solitarie")}>
           Solitario
         </button>
