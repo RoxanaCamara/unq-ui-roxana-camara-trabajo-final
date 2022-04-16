@@ -9,18 +9,19 @@ import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { Button, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import EmailIcon from "@material-ui/icons/Email";
 import LoginCard from "../../components/LoginCard/LoginCard";
+import { AccountCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
   loginButton: {
-    padding: '2% 35%'
+    padding: "2% 35%",
   },
   root: {
     display: "flex",
@@ -61,39 +62,34 @@ const Login = () => {
 
   return (
     <LoginCard>
-
-    
-    <div>
-      
-      <div>
-        <TextField
-          className={classes.margin}
-          id="input-with-icon-textfield"
-          label="Email or Name User"
+      <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <AccountCircle />
+          </Grid>
+          <Grid item>
+            <TextField id="input-with-icon-grid" label="Search your friend" />
+          </Grid>
+        </Grid>
+      <FormControl className={clsx(classes.margin, classes.textField)}>
+        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+        <Input
+          id="standard-adornment-password"
+          type={values.showPassword ? "text" : "password"}
+          value={values.password}
+          onChange={handleChange("password")}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-        <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-password">
-            Password
-          </InputLabel>
-          <Input
-            id="standard-adornment-password"
-            type={values.showPassword ? "text" : "password"}
-            value={values.password}
-            onChange={handleChange("password")}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div>
+      </FormControl>
 
       <Button
         variant="contained"
@@ -116,7 +112,6 @@ const Login = () => {
       <Typography variant="body2" component="p">
         Don't have an account? <b>Sign up</b>
       </Typography>
-    </div>
     </LoginCard>
   );
 };
