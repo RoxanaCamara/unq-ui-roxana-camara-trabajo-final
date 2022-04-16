@@ -29,8 +29,8 @@ Para testear hooks o implementaciones del componente utilizamos *moun*
 Quiero subir a heroku
 
 #### ###########################################################################################
-Para hacerlo multijugador
-1-hacer el back
-
-###
-Responsive
+Que quiero hacer? 
+Un juego con login, pasado la auntenticacion del login
+Seleccionar el tipo de juego
+opciones: solitario y versus
+Iniciar el tipo de juego
