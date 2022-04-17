@@ -38,9 +38,7 @@ const Home = () => {
     <Contenedor>
       <div>
         <Typography variant="body2" component="p">
-          {
-            '"la generala nos salva cuando el ocio se está por volver aburrimiento"'
-          }
+          La generala nos salva cuando el ocio se está por volver aburrimiento
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           ¿Cual vas a jugar hoy?

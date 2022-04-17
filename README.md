@@ -34,3 +34,12 @@ Un juego con login, pasado la auntenticacion del login
 Seleccionar el tipo de juego
 opciones: solitario y versus
 Iniciar el tipo de juego
+
+
+
+####
+agregar redux
+
+Listar los jugadores disponibles
+que los selecciones 
+que los desseleccione

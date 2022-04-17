@@ -8,15 +8,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import { Card, CardContent, Fab } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Typography } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
+    alingIcon: {
+      marginLeft: '70%'
+    }
   }));
 
 const CardListPlayers = () => {
@@ -49,8 +49,7 @@ const CardListPlayers = () => {
   };
   return (
     <>
-      <Card className={classes.root}>
-        <CardContent>
+     
         <Typography variant="h4" gutterBottom>
        Search yoour friends
       </Typography> 
@@ -59,7 +58,7 @@ const CardListPlayers = () => {
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Search your friend" />
+            <TextField id="input-with-icon-grid" label="name user" />
           </Grid>
         </Grid>
 
@@ -90,11 +89,10 @@ const CardListPlayers = () => {
               );
             })}
           </List>
-          <Fab color="primary" aria-label="add">
-            <CheckIcon />
+          <Fab color="primary" aria-label="add" className={classes.alingIcon}>
+            <ArrowForwardIcon />
           </Fab>
-        </CardContent>
-      </Card>
+       
     </>
   );
 };
