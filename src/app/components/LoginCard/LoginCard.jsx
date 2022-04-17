@@ -8,19 +8,10 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 275,
     margin: "5% 5% 10% 50%",
-    padding: '1%'
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
+    padding: '1%',    
+    display: "flex",
+    alignItems: "center"
+  }
 });
 
 const Login = ({children}) => {
@@ -36,7 +27,6 @@ const Login = ({children}) => {
         <Typography variant="h2" component="h2">
              Generala
           </Typography>
-          <AccountCircle className='acountIcon' />
           {children}
         </CardContent>
       </Card>

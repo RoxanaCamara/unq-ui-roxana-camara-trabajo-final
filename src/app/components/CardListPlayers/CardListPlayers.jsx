@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, Fab } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Typography } from '@material-ui/core';
+import CheckIcon from '@material-ui/icons/Check';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +67,7 @@ const CardListPlayers = () => {
             {[0, 1, 2, 3].map((value) => {
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
-                <ListItem key={value} button>
+                <ListItem key={value} button divider>
                   <ListItemAvatar>
                     <Avatar
                       alt={`Avatar n°${value + 1}`}
@@ -89,6 +90,9 @@ const CardListPlayers = () => {
               );
             })}
           </List>
+          <Fab color="primary" aria-label="add">
+            <CheckIcon />
+          </Fab>
         </CardContent>
       </Card>
     </>

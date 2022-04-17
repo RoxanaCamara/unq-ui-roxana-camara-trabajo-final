@@ -9,27 +9,23 @@ import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import EmailIcon from "@material-ui/icons/Email";
 import LoginCard from "../../components/LoginCard/LoginCard";
-import { AccountCircle } from "@material-ui/icons";
+import './Styles.css'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  marginTop: {
+    marginTop: theme.spacing(1),
+  },
   loginButton: {
     padding: "2% 35%",
-  },
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
+  },  
   textField: {
     width: "25ch",
   },
@@ -62,15 +58,8 @@ const Login = () => {
 
   return (
     <LoginCard>
-      <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <AccountCircle />
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="Search your friend" />
-          </Grid>
-        </Grid>
-      <FormControl className={clsx(classes.margin, classes.textField)}>
+      <TextField id="input-with-icon-grid" label="Email or name user" />
+      <FormControl className={classes.textField}>
         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
         <Input
           id="standard-adornment-password"
@@ -95,7 +84,7 @@ const Login = () => {
         variant="contained"
         size="small"
         color="primary"
-        className={classes.loginButton}
+        className={clsx(classes.loginButton, classes.marginTop)}
       >
         Login
       </Button>
@@ -105,10 +94,12 @@ const Login = () => {
       <Typography className={classes.title} color="textSecondary" gutterBottom>
         Or log with:
       </Typography>
+      
+      <div className="iconsRedesSociales">
       <FacebookIcon />
       <InstagramIcon />
       <EmailIcon />
-
+      </div>
       <Typography variant="body2" component="p">
         Don't have an account? <b>Sign up</b>
       </Typography>
