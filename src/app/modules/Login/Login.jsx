@@ -15,6 +15,8 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import EmailIcon from "@material-ui/icons/Email";
 import LoginCard from "../../components/LoginCard/LoginCard";
 import './Styles.css'
+import { connect } from "react-redux";
+import { login } from  '../../reducers/Auth'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -107,4 +109,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = ({ auth }) => ({
+  isAuthenticated: auth.isAuthenticated,
+  loginError: auth.loginError,
+  showModal: auth.showModalLogin,
+  isError: auth.errorMessage
+});
+
+const mapDispatchToProps = { login };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
