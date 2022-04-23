@@ -1,4 +1,4 @@
-import { server } from "../Server/Server";
+import { server } from "../server/Server";
 import { AUTH_ACTION } from "../types/Types";
 
 const initialState = {
