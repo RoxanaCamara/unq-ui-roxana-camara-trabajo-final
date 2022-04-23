@@ -8,7 +8,7 @@ const initialState = {
   loginError: false,
   showModalLogin: false,
   account: {},
-  errorMessage: null,
+  errorMessage: "HOLA",
   redirectMessage: null,
   sessionHasBeenFetched: false,
   idToken: null,
@@ -17,11 +17,16 @@ const initialState = {
 
 const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
 
-export default function auth (state = initialState, action){
+const auth = (state = initialState, action) =>{
     switch (action.type) {
     case AUTH_ACTION.ERROR_MESSAGE:
       return {
-        state
+        ...state, errorMessage: "NO Funciona!!!" 
+      }
+
+      case AUTH_ACTION.LOGIN:
+      return {
+        ...state, errorMessage: " Funciona!!!"
       }
     default:
       return state
@@ -29,10 +34,11 @@ export default function auth (state = initialState, action){
 }
 
 
-export const login = (username, password, rememberMe = false) => async (dispatch) => {
+
+export const loginBB = (username, password, rememberMe = false) => async (dispatch) => {
   const result = await dispatch({
     type: AUTH_ACTION.LOGIN,
-    payload: server.post('api/authenticate', { username, password, rememberMe }),
+    payload: { errorMessage: "Funciona!!!"  } //server.post('api/authenticate', { username, password, rememberMe }),
   });
 
   const bearerToken = result.value.headers.authorization;
@@ -45,3 +51,13 @@ export const login = (username, password, rememberMe = false) => async (dispatch
     }
   }
 };
+
+
+export const loginDispatch = ()  => ({
+  type: AUTH_ACTION.LOGIN  
+})
+
+export const login = (username, password, rememberMe = false) => dispatch => {
+  dispatch(loginDispatch())  
+}
+export default auth;

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({errorMessage, login}) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     amount: "",
@@ -58,6 +58,11 @@ const Login = () => {
     event.preventDefault();
   };
 
+  const logearse = () =>{
+    login("roxana", "camara", false )
+    console.log(errorMessage)
+  }
+  
   return (
     <LoginCard>
       <TextField id="input-with-icon-grid" label="Email or name user" />
@@ -87,6 +92,7 @@ const Login = () => {
         size="small"
         color="primary"
         className={clsx(classes.loginButton, classes.marginTop)}
+        onClick={ () => logearse()}
       >
         Login
       </Button>
@@ -110,12 +116,11 @@ const Login = () => {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  isAuthenticated: auth.isAuthenticated,
+  /*isAuthenticated: auth.isAuthenticated,
   loginError: auth.loginError,
   showModal: auth.showModalLogin,
-  isError: auth.errorMessage
+  ,*/
+  errorMessage: auth.errorMessage
 });
 
-const mapDispatchToProps = { login };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);
