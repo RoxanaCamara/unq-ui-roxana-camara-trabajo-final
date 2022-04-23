@@ -3,16 +3,9 @@ import { AUTH_ACTION } from "../types/Types";
 
 const initialState = {
   loading: false,
+  error: false,
   isAuthenticated: false,
-  loginSuccess: false,
-  loginError: false,
-  showModalLogin: false,
-  account: {},
-  errorMessage: "HOLA",
-  redirectMessage: null,
-  sessionHasBeenFetched: false,
-  idToken: null,
-  logoutUrl: null,
+  account: {}
 };
 
 const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
@@ -21,12 +14,12 @@ const auth = (state = initialState, action) =>{
     switch (action.type) {
     case AUTH_ACTION.ERROR_MESSAGE:
       return {
-        ...state, errorMessage: "NO Funciona!!!" 
+        ...state, error: true 
       }
 
       case AUTH_ACTION.LOGIN:
       return {
-        ...state, errorMessage: " Funciona!!!"
+        ...state, isAuthenticated: true
       }
     default:
       return state

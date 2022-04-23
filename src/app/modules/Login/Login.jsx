@@ -17,6 +17,7 @@ import LoginCard from "../../components/LoginCard/LoginCard";
 import './Styles.css'
 import { connect } from "react-redux";
 import { login } from  '../../reducers/Auth'
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -36,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({errorMessage, login}) => {
+const Login = ({login, error, isAuthenticated}) => {
   const classes = useStyles();
+  const history = useHistory()
+
   const [values, setValues] = React.useState({
     amount: "",
     password: "",
@@ -58,9 +61,12 @@ const Login = ({errorMessage, login}) => {
     event.preventDefault();
   };
 
+
   const logearse = () =>{
     login("roxana", "camara", false )
-    console.log(errorMessage)
+    if(isAuthenticated){
+      history.push("/home")
+    }
   }
   
   return (
@@ -116,11 +122,9 @@ const Login = ({errorMessage, login}) => {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  /*isAuthenticated: auth.isAuthenticated,
+  isAuthenticated: auth.isAuthenticated,
   loginError: auth.loginError,
-  showModal: auth.showModalLogin,
-  ,*/
-  errorMessage: auth.errorMessage
+  error: auth.error
 });
 
 export default connect(mapStateToProps, { login })(Login);
