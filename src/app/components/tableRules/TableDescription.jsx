@@ -59,7 +59,7 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Dados</TableCell>
+                    <TableCell>DadosN</TableCell>
                     <TableCell>Valor</TableCell>
                   </TableRow>
                 </TableHead>

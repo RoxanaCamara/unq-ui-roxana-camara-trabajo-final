@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -11,11 +11,10 @@ import {
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faQuestion, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-
-import "./style.css";
 import { StyledTableCell, StyledTableRow } from "../../shared/layout/Shared";
-import { SessionContext } from "../../hooks/Session";
 import { useJugadas } from "../../hooks/useJugadas";
+import { useDices } from "../../hooks/useDices";
+import "./style.css";
 
 export const useStyles = makeStyles((theme) => ({
   table: {
@@ -25,9 +24,8 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 const TableScore = () => {
-  const { state } = useContext(SessionContext);
-  const { puntaje, oportunidades } = state;
-  const { jugadaEliminada } = useJugadas();
+  const { oportunidades, puntaje } = useDices()
+  const { jugadaEliminada} = useJugadas();
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
 

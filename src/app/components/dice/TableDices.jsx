@@ -5,13 +5,12 @@ import { Jugadas } from "../game/Jugadas";
 import { useDices } from "../../hooks/useDices";
 import './style.css'
 import DiceAndCheck from "./DiceAndCheck";
-import { SessionContext } from "../../hooks/Session";
+import { connect } from "react-redux";
 
 
 const TableDices = () => {
-  const { state } = useContext(SessionContext);
-  const { dados, finTurno, puntaje, oportunidades } = state;
-  const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice } = useDices();
+  const { tirarDados, tirarDadosSeleccionados, changeValueIndexDice,
+     dadosN, turno, oportunidades, puntaje } = useDices();
 
   return (
     <Grid
@@ -21,13 +20,13 @@ const TableDices = () => {
       alignItems="center"  xs={12}
     >
       <Grid item>
-        {finTurno ? (
+        {turno ? (
           <button
             role="button"
             className="button-39"
             onClick={() => tirarDados()}
           >
-            Tirar Dados
+            Tirar DadosN
           </button>
         ) : (
           <>
@@ -49,9 +48,9 @@ const TableDices = () => {
         >
 
         {
-          !finTurno &&
+          !turno &&
           <div className="table_dices">
-            {dados.map((d, index) => (
+            {dadosN.map((d, index) => (
             <DiceAndCheck 
               name={d.name} 
               num={d.num}            
@@ -68,4 +67,9 @@ const TableDices = () => {
     </Grid>
   );
 };
-export default TableDices;
+
+const mapStateToProps = ({ jugada }) => ({
+  /*dadosN: jugada.dadosN,*/
+});
+
+export default connect(mapStateToProps, null)(TableDices);

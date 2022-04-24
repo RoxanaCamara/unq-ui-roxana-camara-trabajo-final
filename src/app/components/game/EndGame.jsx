@@ -3,14 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
-import { SessionContext } from '../../hooks/Session';
 import { useJugadas } from '../../hooks/useJugadas';
 
 const EndGameModal = () => {
-
-  const { state } = useContext(SessionContext)
-  const { finPartida  } = state
-  const { initGame } = useJugadas()
+  const { initGame, finPartida} = useJugadas()
   const history = useHistory()
 
   const handleClose = () => {

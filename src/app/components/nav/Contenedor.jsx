@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faPencilRuler, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom';
 import { Button, Container, IconButton, Typography, Toolbar, AppBar } from '@material-ui/core';
-import { SessionContext } from '../../hooks/Session';
 import { useJugadas } from '../../hooks/useJugadas';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Contenedor = ({ children }) => {
-  const { state } = useContext(SessionContext);
-  const { tipoDeJugada } = state;
   const { initGame } = useJugadas()
   const classes = useStyles();
   const history = useHistory()

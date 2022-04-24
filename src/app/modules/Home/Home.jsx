@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { SessionContext } from "../../hooks/Session";
 import { makeStyles, Typography } from "@material-ui/core";
 import { Contenedor } from "../../components/nav/Contenedor";
+import { useJugadas } from "../../hooks/useJugadas";
 
 const useStyles = makeStyles({
   root: {
@@ -25,14 +25,13 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
 
-  const { actions } = useContext(SessionContext);
-  const { setTipoDeJugada } = actions;
+  const { setTipoDeJugada2 } = useJugadas();
 
   const history = useHistory();
 
   const handleRedirect = (text) => {
     history.push(text);
-    setTipoDeJugada(text);
+    setTipoDeJugada2(text);
   };
   return (
     <Contenedor>

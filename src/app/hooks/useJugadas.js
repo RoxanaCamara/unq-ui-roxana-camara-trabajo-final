@@ -1,6 +1,6 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { dadosDefault } from "../shared/utils/Utils"
-import { SessionContext } from "./Session"
+import { useDices } from "./useDices"
 
 export const useJugadas = () => {
 
@@ -8,27 +8,26 @@ export const useJugadas = () => {
         JUGADO
         ANULADO
         '' QUE SERIA IGUAL A VACIO
+
     */
-
-    const { state, actions } = useContext(SessionContext)
-    const { dados, puntaje } = state
-
-    const { setFinTurno, setFinPartida, setpuntaje, setDados, setOportunidades } = actions
+   const [tipoDeJugada, setTipoDeJugada] = useState('')
+   const [finPartida, setFinPartida] = useState(false)
+    const { dadosN, puntaje, setOportunidades2, setFinTurno, setDados, setpuntaje2} = useDices()
 
     const siEstaXNoDebeEstarY = (x, y) => {
-        return dados[x].num == x && !dados[y].num == y
+        return dadosN[x].num == x && !dadosN[y].num == y
     }
     
-    //cuenta los repetidos de los dados
+    //cuenta los repetidos de los dadosN
     const cantRepetidos = (num) => {
-        return dados.filter(function (d) {
+        return dadosN.filter(function (d) {
             return  d.num === num
         }).length
     }
 
     const existeEsaCantRepetidos = (num) => {
         let valor = false
-        dados.forEach(function (i) { valor = (valor || cantRepetidos(i) == num) });
+        dadosN.forEach(function (i) { valor = (valor || cantRepetidos(i) == num) });
         return valor
     }
 
@@ -40,12 +39,12 @@ export const useJugadas = () => {
 
     const esEscalera = () => {
         //[X,2,3,4,5,6]  [1,2,3,4,5,X]
-        dados.sort(function(a, b) { return a.num - b.num;});
+        dadosN.sort(function(a, b) { return a.num - b.num;});
         let escalera = false
         let index = 1
             for (let i = 0; i > 5; i ++){
                 if(index != 1 || index != 6){
-                    escalera = escalera && dados[i].num == index
+                    escalera = escalera && dadosN[i].num == index
                 } 
                 index++
             }
@@ -53,9 +52,9 @@ export const useJugadas = () => {
     }
 
     const esGenerala = () => {
-        //todos los numeros de los dados son iguales
-        return dados.every( function (d) {
-            return d.num === dados[0].num
+        //todos los numeros de los dadosN son iguales
+        return dadosN.every( function (d) {
+            return d.num === dadosN[0].num
         } ) 
     }
 
@@ -98,9 +97,9 @@ export const useJugadas = () => {
         let puntajeNew = puntaje
         puntajeNew[index].valor = num
         puntajeNew[index].played= 'JUGADO'
-        setpuntaje(puntajeNew)
+        setpuntaje2(puntajeNew)
         setFinTurno(true)
-        setOportunidades(0)
+        setOportunidades2(0)
         setFinPartida(terminoElJuego() )
     }
 
@@ -117,15 +116,15 @@ export const useJugadas = () => {
     const jugadaEliminada = (index) => {
         let puntajeNew = puntaje
         puntajeNew[index].played= 'ANULADO'
-        setpuntaje(puntajeNew)
+        setpuntaje2(puntajeNew)
         setFinTurno(true)
-        setOportunidades(0)
+        setOportunidades2(0)
         setFinPartida(terminoElJuego() )
     } 
 
     const initGame = () => {
         setDados(dadosDefault)
-        setpuntaje(initPuntaje(puntaje))
+        setpuntaje2(initPuntaje(puntaje))
         setFinPartida(false)
     }
     
@@ -135,5 +134,9 @@ export const useJugadas = () => {
         return p;
     }
 
-    return { usarTirada, saberPuntaje, totalPuntaje, jugadaEliminada, initGame }
+    const setTipoDeJugada2 =(n) => {
+        setTipoDeJugada(n)
+    }
+
+    return { usarTirada, saberPuntaje, totalPuntaje, jugadaEliminada, initGame, finPartida, tipoDeJugada, setTipoDeJugada2 }
 }
